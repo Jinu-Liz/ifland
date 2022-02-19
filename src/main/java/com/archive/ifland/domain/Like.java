@@ -5,13 +5,14 @@ import lombok.Getter;
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.*;
+import static javax.persistence.GenerationType.*;
 
 @Getter
 @Entity
 public class Like {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = IDENTITY)
   @Column(name = "like_id")
   private Long id;
 

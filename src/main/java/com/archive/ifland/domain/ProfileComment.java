@@ -5,11 +5,12 @@ import lombok.Getter;
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.*;
 
 @Entity @Getter
 public class ProfileComment extends BaseTimeEntity {
 
-  @Id @GeneratedValue
+  @Id @GeneratedValue(strategy = IDENTITY)
   @Column(name = "comment_id")
   private Long id;
 

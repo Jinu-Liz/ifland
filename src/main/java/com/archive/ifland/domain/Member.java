@@ -4,10 +4,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -15,19 +14,19 @@ import javax.persistence.Id;
 public class Member extends BaseTimeEntity {
 
   @Id
-  @GeneratedValue
-  @Column(name = "user_id")
+  @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "member_id")
   private Long id;
 
   private String name;
 
-  private String ifrandNickName;
+  private String iflandNickName;
 
   private String password;
 
-  public Member(String name, String ifrandNickName, String password) {
+  public Member(String name, String iflandNickName, String password) {
     this.name = name;
-    this.ifrandNickName = ifrandNickName;
+    this.iflandNickName = iflandNickName;
     this.password = password;
   }
 
