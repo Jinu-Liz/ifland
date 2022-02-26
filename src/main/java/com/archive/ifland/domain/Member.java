@@ -1,5 +1,6 @@
 package com.archive.ifland.domain;
 
+import com.archive.ifland.controller.MemberForm;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +25,10 @@ public class Member extends BaseTimeEntity {
 
   private String password;
 
-  public Member(String name, String iflandNickName, String password) {
-    this.name = name;
-    this.iflandNickName = iflandNickName;
-    this.password = password;
+  public Member(MemberForm memberForm) {
+    this.name = memberForm.getName();
+    this.iflandNickName = memberForm.getIflandNickName();
+    this.password = memberForm.getPassword();
   }
 
 }

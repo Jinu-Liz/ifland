@@ -1,7 +1,7 @@
 package com.archive.ifland.controller;
 
-import com.archive.ifland.domain.Member;
-import com.archive.ifland.repository.MemberRepository;
+import com.archive.ifland.domain.Profile;
+import com.archive.ifland.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,26 +14,26 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/members")
-public class MemberController {
+@RequestMapping("/profile")
+public class ProfileController {
 
-  private final MemberRepository memberRepository;
+  private final ProfileRepository profileRepository;
 
   @GetMapping("/new")
   public String createForm(Model model) {
-    model.addAttribute("memberForm", new MemberForm());
+    model.addAttribute("profileForm", new ProfileForm());
 
-    return "members/createMemberForm";
+    return "members/createProfileForm";
   }
 
   @PostMapping("/new")
-  public String create(@Valid MemberForm memberForm, BindingResult result) {
+  public String create(@Valid ProfileForm profileForm, BindingResult result) {
 
-    if (result.hasErrors()) return "members/createMemberForm";
+    if (result.hasErrors()) return "members/createProfileForm";
 
-    Member member = new Member(memberForm);
+    Profile profile = new Profile(profileForm);
 
-    memberRepository.save(member);
+    profileRepository.save(profile);
 
     return "redirect:/";
   }

@@ -1,5 +1,6 @@
 package com.archive.ifland.domain;
 
+import com.archive.ifland.controller.ProfileForm;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class Profile extends BaseTimeEntity {
   @Column(name = "profile_id")
   private Long id;
 
-  private String ifland_id;
+  private String iflandNickName;
 
   private String image;
 
@@ -40,4 +41,19 @@ public class Profile extends BaseTimeEntity {
   @OneToMany(mappedBy = "profile")
   private List<Tag> tags = new ArrayList<>();
 
+  public Profile(ProfileForm profileForm) {
+    this.iflandNickName = profileForm.getIflandNickName();
+    this.image = profileForm.getImage();
+    this.contents = profileForm.getContents();
+    this.likes = profileForm.getLikes();
+    this.hates = profileForm.getHates();
+
+    SNS sns = new SNS();
+    sns.setInstagram(profileForm.getInstagram());
+    sns.setFacebook(profileForm.getFacebook());
+    sns.setBlog(profileForm.getBlog());
+
+    this.sns = sns;
+    this.tags = profileForm.getTags();
+  }
 }
