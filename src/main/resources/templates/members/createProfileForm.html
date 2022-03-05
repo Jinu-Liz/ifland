@@ -1,23 +1,33 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header :: header"/>
 <style>
     .fieldError {
         border-color: #bd2130;
     }
+    .drag-over { background-color: #ff0; }
+    .thumb { width:200px; padding:5px; float:left; }
+    .thumb > img { width:70%; }
+    .thumb > .close { position:absolute; background-color:red; cursor:pointer; }
 </style>
 <body>
-
 <div class="container">
   <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 
   <form role="form" th:action="@{/profile/new}" th:object="${profileForm}" method="post">
     <div class="form-group">
+      <div id="drop" class="form-control" style="border:1px solid black; width:190px; height:220px; padding:3px">
+        <div id="thumbnails"/>
+      </div>
+    </div>
+    <input type="file" onchange="preview()" accept="image/*">
+
+    <div class="form-group">
       <label th:for="iflandNickName">ifland 닉네임</label>
 
       <input type="text" th:field="*{iflandNickName}" class="form-control" placeholder="이프랜드 닉네임을 적어주세요"
-             th:class="${#fields.hasErrors('iflandNickName')}? 'form-control fieldError' : 'form-control'">
-      <p th:if="${#fields.hasErrors('iflandNickName')}" th:errors="*{iflandNickName}">Incorrect date</p>
+             th:class="${#fields.hasErrors('iflandNickName')} ? 'form-control fieldError' : 'form-control'">
+      <p th:if="${#fields.hasErrors('iflandNickName')}" style="color:#bd2130;" th:errors="*{iflandNickName}">Incorrect date</p>
     </div>
 
     <div class="form-group">
@@ -45,6 +55,6 @@
   <br/>
   <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
-
+<script th:src="@{/js/util/dragDropImage.js}"></script>
 </body>
 </html>

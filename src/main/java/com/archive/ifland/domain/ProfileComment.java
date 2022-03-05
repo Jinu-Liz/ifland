@@ -18,6 +18,19 @@ public class ProfileComment extends BaseTimeEntity {
   @JoinColumn(name = "profile_id")
   private Profile profile;
 
+  @ManyToOne(fetch = LAZY)
+  @JoinColumn(name = "member_id")
+  private Member member;
+
   private String contents;
 
+  public ProfileComment(Profile profile, Member member, String contents) {
+    this.profile = profile;
+    this.member = member;
+    this.contents = contents;
+  }
+
+  protected ProfileComment() {
+
+  }
 }
