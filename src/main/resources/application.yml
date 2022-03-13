@@ -20,6 +20,13 @@ spring:
     hibernate:
       ddl-auto: none
 
+  # 개발 시 resource 실시간 반영
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+
   # Thymeleaf 설정
   thymeleaf:
     check-template-location: true   # 해당 위치에 파일이 있는지 참조
