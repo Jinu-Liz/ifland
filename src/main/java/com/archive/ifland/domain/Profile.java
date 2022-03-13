@@ -3,15 +3,18 @@ package com.archive.ifland.domain;
 import com.archive.ifland.controller.ProfileForm;
 import com.archive.ifland.exception.NotEnoughCountException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = PROTECTED)
 public class Profile extends BaseTimeEntity {
 
   @Id
@@ -57,8 +60,6 @@ public class Profile extends BaseTimeEntity {
     this.sns = sns;
     this.tags = profileForm.getTags();
   }
-
-  public Profile() {}
 
   public void plusLikeCount() {
     this.likeCount = this.likeCount + 1;
