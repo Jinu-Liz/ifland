@@ -8,11 +8,11 @@ public class HomeController {
 
   @GetMapping("/")
   public String home() {
-    return "home";
+    return "main/index";
   }
 
   @GetMapping("/login")
   public String login() {
-    return "login";
+    return "main/login";
   }
 }
