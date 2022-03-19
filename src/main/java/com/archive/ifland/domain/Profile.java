@@ -39,6 +39,9 @@ public class Profile extends BaseTimeEntity {
 
   private int likeCount;
 
+  @Column(name = "view")
+  private int viewCount;
+
   @OneToMany(mappedBy = "profile")
   private List<ProfileComment> comments = new ArrayList<>();
 
@@ -70,4 +73,9 @@ public class Profile extends BaseTimeEntity {
     if (resultCnt < 0) throw new NotEnoughCountException("좋아요 수가 0보다 작음");
     this.likeCount = resultCnt;
   }
+
+  public void plusViewCount() {
+    this.viewCount = this.viewCount + 1;
+  }
+
 }

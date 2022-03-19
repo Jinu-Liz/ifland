@@ -8,6 +8,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.*;
 
 @Entity @Getter
+@Table(name = "profile_hate")
 public class Hate {
 
   @Id
@@ -15,7 +16,8 @@ public class Hate {
   @Column(name = "hate_id")
   private Long id;
 
-  private String like;
+  @Column(name = "hate_thing")
+  private String hate;
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "profile_id")

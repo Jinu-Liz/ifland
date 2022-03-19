@@ -1,10 +1,10 @@
 spring:
   datasource:
-    ifland:
-      driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/ifland_dic?serverTimezone=UTC&characterEncoding=UTF-8
-      username: root
-      password: yun0587
+#    ifland:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ifland_dic?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: yun0587
 
   # JPA 설정
   jpa:
@@ -33,12 +33,12 @@ spring:
     cache: false    # 캐시를 남기지 않음
 
 # Mybatis 설정
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-    call-setters-on-nulls: true
-  mapper-locations: classpath:/mapper/sql/*.xml
-  config-location: classpath:/mapper/config/mybatis-config.xml
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    call-setters-on-nulls: true
+#  mapper-locations: classpath:/mapper/sql/*.xml
+#  config-location: classpath:/mapper/config/mybatis-config.xml
 
 # logging 설정
 logging:

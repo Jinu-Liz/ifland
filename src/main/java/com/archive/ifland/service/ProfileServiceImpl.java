@@ -54,6 +54,15 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
+  public void plusViewCount(Long id) {
+    Optional<Profile> profileOptional = profileRepository.findById(id);
+    profileOptional.ifPresent(profile -> {
+      profile.plusViewCount();
+      profileRepository.save(profile);
+    });
+  }
+
+  @Override
   public ProfileCommentResponse writeComment(String contents) {
     ProfileCommentResponse result = null;
     Profile profile = profileRepository.findAll().get(0);

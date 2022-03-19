@@ -9,6 +9,7 @@ import static javax.persistence.GenerationType.*;
 
 @Getter
 @Entity
+@Table(name = "profile_like")
 public class Like {
 
   @Id
@@ -16,6 +17,7 @@ public class Like {
   @Column(name = "like_id")
   private Long id;
 
+  @Column(name = "like_thing")
   private String like;
 
   @ManyToOne(fetch = LAZY)
