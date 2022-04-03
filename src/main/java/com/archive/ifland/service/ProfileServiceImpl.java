@@ -9,6 +9,8 @@ import com.archive.ifland.repository.MemberRepository;
 import com.archive.ifland.repository.ProfileCommentRepository;
 import com.archive.ifland.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -77,4 +79,11 @@ public class ProfileServiceImpl implements ProfileService {
 
     return result;
   }
+
+  @Override
+  public Page<ProfileDto> iflanderList(Pageable pageable) {
+    return profileRepository.findAll(pageable).map(ProfileDto::new);
+  }
+
+
 }

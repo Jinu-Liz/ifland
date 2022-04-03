@@ -34,8 +34,14 @@ public class Profile extends BaseTimeEntity {
   @OneToMany(mappedBy = "profile")
   private List<Hate> hates = new ArrayList<>();
 
-  @Embedded
-  private SNS sns;
+//  @Embedded
+//  private SNS sns;
+
+  private String instagram;
+
+  private String facebook;
+
+  private String blog;
 
   private int likeCount;
 
@@ -49,19 +55,15 @@ public class Profile extends BaseTimeEntity {
   private List<Tag> tags = new ArrayList<>();
 
   public Profile(ProfileForm profileForm) {
-    this.iflandNickName = profileForm.getIflandNickName();
-    this.image = profileForm.getImage();
-    this.contents = profileForm.getContents();
-    this.likes = profileForm.getLikes();
-    this.hates = profileForm.getHates();
-
-    SNS sns = new SNS();
-    sns.setInstagram(profileForm.getInstagram());
-    sns.setFacebook(profileForm.getFacebook());
-    sns.setBlog(profileForm.getBlog());
-
-    this.sns = sns;
-    this.tags = profileForm.getTags();
+    iflandNickName = profileForm.getIflandNickName();
+    image = profileForm.getImage();
+    contents = profileForm.getContents();
+    likes = profileForm.getLikes();
+    hates = profileForm.getHates();
+    instagram = profileForm.getInstagram();
+    facebook = profileForm.getFacebook();
+    blog = profileForm.getBlog();
+    tags = profileForm.getTags();
   }
 
   public void plusLikeCount() {

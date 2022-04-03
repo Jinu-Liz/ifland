@@ -42,9 +42,9 @@ public class ProfileDto {
     this.iflandNickName = profile.getIflandNickName();
     this.image = StringUtils.hasText(profile.getImage()) ? profile.getImage() : "/images/profile/basic-profile-img.png";
     this.contents = profile.getContents();
-    this.instagram = profile.getSns().getInstagram();
-    this.facebook = profile.getSns().getFacebook();
-    this.blog = profile.getSns().getBlog();
+    this.instagram = profile.getInstagram();
+    this.facebook = profile.getFacebook();
+    this.blog = profile.getBlog();
     this.likes = profile.getLikes();
     this.hates = profile.getHates();
 
