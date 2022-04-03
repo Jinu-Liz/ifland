@@ -32,6 +32,13 @@ spring:
     check-template-location: true   # 해당 위치에 파일이 있는지 참조
     cache: false    # 캐시를 남기지 않음
 
+  data:
+    web:
+      pageable:
+        default-page-size: 12
+#        max-page-size: 2000
+#        one-indexed-parameters: true
+
 # Mybatis 설정
 #mybatis:
 #  configuration:
