@@ -18,7 +18,7 @@ public class HomeController {
   @GetMapping("/")
   public String home(Model model) {
 
-    List<ProfileDto> profiles = profileService.selectProfiles();
+    List<ProfileDto> profiles = profileService.selectProfiles(6);
     model.addAttribute("profileList", profiles);
 
     return "main/index";

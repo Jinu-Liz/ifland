@@ -48,10 +48,10 @@ spring:
 #  config-location: classpath:/mapper/config/mybatis-config.xml
 
 # logging 설정
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        type:
+#          descriptor:
+#            sql: trace
