@@ -14,10 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -61,8 +58,13 @@ public class ProfileController {
     return "comment";
   }
 
-  @GetMapping("/detail")
-  public String detail() {
+  @GetMapping("/detail/{id}")
+  public String detail(Model model,
+                       @PathVariable("id") Long id) {
+
+    ProfileDto profile = profileService.findIflander(id);
+
+    model.addAttribute("profile", profile);
 
     return "main/anime-details";
   }

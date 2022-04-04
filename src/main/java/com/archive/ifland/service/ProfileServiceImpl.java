@@ -38,6 +38,15 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
+  public List<ProfileDto> selectProfiles(int count) {
+    List<Profile> profiles = profileRepository.findAll().subList(0, count);
+    List<ProfileDto> resultList = profiles.stream()
+      .map(ProfileDto::new)
+      .collect(Collectors.toList());
+    return resultList;
+  }
+
+  @Override
   public void plusLikeCount(Long id) {
     Optional<Profile> profileOptional = profileRepository.findById(id);
     profileOptional.ifPresent(profile -> {
@@ -85,5 +94,12 @@ public class ProfileServiceImpl implements ProfileService {
     return profileRepository.findAll(pageable).map(ProfileDto::new);
   }
 
+  @Override
+  public ProfileDto findIflander(Long id) {
+    Optional<Profile> optional = profileRepository.findById(id);
+    plusViewCount(id);
 
+    return optional.map(ProfileDto::new).orElseThrow();
+
+  }
 }

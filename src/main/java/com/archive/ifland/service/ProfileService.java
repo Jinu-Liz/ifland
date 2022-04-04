@@ -11,6 +11,8 @@ public interface ProfileService {
 
   List<ProfileDto> selectProfiles();
 
+  List<ProfileDto> selectProfiles(int count);
+
   void plusLikeCount(Long id);
 
   void minusLikeCount(Long id);
@@ -20,5 +22,7 @@ public interface ProfileService {
   ProfileCommentResponse writeComment(String contents);
 
   Page<ProfileDto> iflanderList(Pageable pageable);
+
+  ProfileDto findIflander(Long id);
 
 }

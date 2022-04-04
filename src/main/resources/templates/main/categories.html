@@ -56,24 +56,26 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-6" th:each="profile : ${profileList}">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" th:style="${'background-image: url('+ profile.image + ')'}">
-                                        <div class="comment">
-                                            <i class="fa fa-heart"></i>
-                                            <div class="like_count" th:text="${profile.likeCount}" style="float: right; margin-left: 5px;"></div>
+                                <a th:href="@{/profile/detail/{id}(id = ${profile.id})}">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" th:style="${'background-image: url('+ profile.image + ')'}">
+                                            <div class="comment">
+                                                <i class="fa fa-heart"></i>
+                                                <div class="like_count" th:text="${profile.likeCount}" style="float: right; margin-left: 5px;"></div>
+                                            </div>
+                                            <div class="view">
+                                                <i class="fa fa-eye"></i>
+                                                <div class="view_count" th:text="${profile.viewCount}" style="float: right; margin-left: 5px;"></div>
+                                            </div>
                                         </div>
-                                        <div class="view">
-                                            <i class="fa fa-eye"></i>
-                                            <div class="view_count" th:text="${profile.viewCount}" style="float: right; margin-left: 5px;"></div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                <li th:each="tag : ${profile.tags}" th:text="${tag.tag}" th:style="${'background: rgba(' + tag.rgba + ')'}"></li>
+                                            </ul>
+                                            <h5 th:text="${profile.iflandNickName}" style="color: #ffffff;"></h5>
                                         </div>
                                     </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li th:each="tag : ${profile.tags}" th:text="${tag.tag}" th:style="${'background: rgba(' + tag.rgba + ')'}"></li>
-                                        </ul>
-                                        <h5 th:text="${profile.iflandNickName}" style="color: #ffffff;"><a href="#"></a></h5>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -192,8 +194,8 @@
 </section>
 <!-- Product Section End -->
 
-  <!-- Search model Begin -->
-  <div class="search-model">
+<!-- Search model Begin -->
+<div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch"><i class="icon_close"></i></div>
         <form class="search-model-form">
