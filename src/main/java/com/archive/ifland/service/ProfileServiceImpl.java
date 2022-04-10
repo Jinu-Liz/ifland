@@ -1,15 +1,16 @@
 package com.archive.ifland.service;
 
-import com.archive.ifland.domain.Member;
-import com.archive.ifland.domain.Profile;
-import com.archive.ifland.domain.ProfileComment;
+import com.archive.ifland.domain.*;
 import com.archive.ifland.dto.ProfileCommentResponse;
 import com.archive.ifland.dto.ProfileDto;
 import com.archive.ifland.repository.MemberRepository;
 import com.archive.ifland.repository.ProfileCommentRepository;
 import com.archive.ifland.repository.ProfileRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.archive.ifland.domain.QHate.*;
+import static com.archive.ifland.domain.QLike.*;
+import static com.archive.ifland.domain.QProfile.*;
+import static com.archive.ifland.domain.QProfileComment.*;
+import static com.archive.ifland.domain.QTag.*;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -27,10 +34,37 @@ public class ProfileServiceImpl implements ProfileService {
   private final ProfileRepository profileRepository;
   private final ProfileCommentRepository profileCommentRepository;
   private final MemberRepository memberRepository;
+  private final JPAQueryFactory queryFactory;
 
   @Override
   public List<ProfileDto> selectProfiles() {
-    List<Profile> profiles = profileRepository.findAll();
+//    List<Profile> profiles = profileRepository.findAll();
+    List<Profile> profiles =
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.tags, tag1)
+        .fetchJoin()
+        .distinct()
+        .fetch();
+
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.comments, profileComment)
+        .fetchJoin()
+        .fetch();
+
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.likes, like1)
+        .fetchJoin()
+        .fetch();
+
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.hates, hate1)
+        .fetchJoin()
+        .fetch();
+
     List<ProfileDto> resultList = profiles.stream()
       .map(ProfileDto::new)
       .collect(Collectors.toList());
@@ -39,7 +73,34 @@ public class ProfileServiceImpl implements ProfileService {
 
   @Override
   public List<ProfileDto> selectProfiles(int count) {
-    List<Profile> profiles = profileRepository.findAll().subList(0, count);
+//    List<Profile> profiles = profileRepository.findAll().subList(0, count);
+    List<Profile> profiles =
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.tags, tag1)
+        .fetchJoin()
+        .distinct()
+        .limit(count)
+        .fetch();
+
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.comments, profileComment)
+        .fetchJoin()
+        .fetch();
+
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.likes, like1)
+        .fetchJoin()
+        .fetch();
+
+      queryFactory
+        .selectFrom(profile)
+        .leftJoin(profile.hates, hate1)
+        .fetchJoin()
+        .fetch();
+
     List<ProfileDto> resultList = profiles.stream()
       .map(ProfileDto::new)
       .collect(Collectors.toList());
@@ -90,8 +151,26 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
-  public Page<ProfileDto> iflanderList(Pageable pageable) {
-    return profileRepository.findAll(pageable).map(ProfileDto::new);
+  public Page<ProfileDto> iflanderList(Pageable pageable, String keyword) {
+    List<Profile> result = queryFactory
+      .selectFrom(profile)
+      .leftJoin(profile.tags, tag1)
+      .fetchJoin()
+      .where(containsKeyword(keyword))
+      .distinct()
+      .offset(pageable.getOffset())
+      .limit(pageable.getPageSize())
+      .fetch();
+
+    List<Long> totalCount = queryFactory
+      .select(profile.count())
+      .from(profile)
+      .where(containsKeyword(keyword))
+      .fetch();
+
+    List<ProfileDto> resultDto = result.stream().map(ProfileDto::new).collect(Collectors.toList());
+
+    return new PageImpl<>(resultDto, pageable, totalCount.get(0));
   }
 
   @Override
@@ -100,6 +179,11 @@ public class ProfileServiceImpl implements ProfileService {
     plusViewCount(id);
 
     return optional.map(ProfileDto::new).orElseThrow();
+  }
 
+  private BooleanExpression containsKeyword(String keyword) {
+    if (!StringUtils.hasText(keyword)) return null;
+
+      return profile.iflandNickName.contains(keyword);
   }
 }

@@ -54,6 +54,7 @@ dependencies {
     /* queryDSL */
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-core:${queryDslVersion}"
 
     /* DB 관련 */
 //    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'

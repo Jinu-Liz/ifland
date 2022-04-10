@@ -15,8 +15,8 @@
           <div class="header__nav">
             <nav class="header__menu mobile-menu">
               <ul>
-                <li class="active"><a th:href="@{/}">홈</a></li>
-                <li><a th:href="@{/profile/category}">인물도감</a></li>
+                <li th:classappend="${cp eq 'home'} ? 'active' : ''"><a th:href="@{/}">홈</a></li>
+                <li th:classappend="${cp eq 'iflanderInfo'} ? 'active' : ''"><a th:href="@{/profile/category}">인물도감</a></li>
 <!--                  <ul class="dropdown">-->
 <!--                    <li><a th:href="@{/category}">Categories</a></li>-->
 <!--                    <li><a th:href="@{/profile/detail}">Profile Details</a></li>-->

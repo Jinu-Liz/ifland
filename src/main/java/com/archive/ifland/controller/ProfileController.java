@@ -72,12 +72,14 @@ public class ProfileController {
   @GetMapping("/category")
   public String category(Model model,
                          @PageableDefault(size = 1) Pageable pageable,
-                         @RequestParam(required = false, defaultValue = "0", value = "page") int page) {
+                         @RequestParam(required = false, defaultValue = "0", value = "page") int page,
+                         @RequestParam(required = false, value = "keyword") String keyword) {
 
-    Page<ProfileDto> profilePage = profileService.iflanderList(pageable);
+    Page<ProfileDto> profilePage = profileService.iflanderList(pageable, keyword);
     PageDto pageDto = new PageDto(profilePage, pageable);
     model.addAttribute("profileList", profilePage.getContent());
     model.addAttribute("pageDto", pageDto);
+    model.addAttribute("cp", "iflanderInfo");
 
     return "main/categories";
 

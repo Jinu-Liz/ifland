@@ -21,7 +21,7 @@ public interface ProfileService {
 
   ProfileCommentResponse writeComment(String contents);
 
-  Page<ProfileDto> iflanderList(Pageable pageable);
+  Page<ProfileDto> iflanderList(Pageable pageable, String keyword);
 
   ProfileDto findIflander(Long id);
 

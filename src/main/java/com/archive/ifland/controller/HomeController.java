@@ -20,6 +20,7 @@ public class HomeController {
 
     List<ProfileDto> profiles = profileService.selectProfiles(6);
     model.addAttribute("profileList", profiles);
+    model.addAttribute("cp", "home");
 
     return "main/index";
   }
