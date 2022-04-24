@@ -39,6 +39,18 @@ spring:
 #        max-page-size: 2000
 #        one-indexed-parameters: true
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          socketFactory.class: javax.net.ssl.SSLSocketFactory
+          auth: true
+          starttls:
+            enable: true
 # Mybatis 설정
 #mybatis:
 #  configuration:

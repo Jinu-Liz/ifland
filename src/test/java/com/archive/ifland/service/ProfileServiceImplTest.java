@@ -1,6 +1,8 @@
 package com.archive.ifland.service;
 
-import com.archive.ifland.domain.*;
+import com.archive.ifland.domain.Profile;
+import com.archive.ifland.domain.ProfileComment;
+import com.archive.ifland.domain.Tag;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.archive.ifland.domain.QHate.*;
-import static com.archive.ifland.domain.QLike.*;
+import static com.archive.ifland.domain.QHate.hate1;
+import static com.archive.ifland.domain.QLike.like1;
 import static com.archive.ifland.domain.QProfile.profile;
-import static com.archive.ifland.domain.QProfileComment.*;
+import static com.archive.ifland.domain.QProfileComment.profileComment;
 import static com.archive.ifland.domain.QTag.tag1;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
