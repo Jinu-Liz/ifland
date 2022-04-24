@@ -1,15 +1,14 @@
 package com.archive.ifland.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
-@Builder
+@Data
 public class UserDto {
 
-  public String id;
+  private String id;
 
-  public String iflandNickName;
+  private String iflandNickName;
+
+  private String verifiedLink;
 
 }
