@@ -4,11 +4,10 @@ import com.archive.ifland.controller.MemberForm;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -22,16 +21,20 @@ public class Member extends BaseTimeEntity {
   @Column(name = "member_id")
   private Long id;
 
-  private String name;
+  private String email;
 
   private String iflandNickName;
 
   private String password;
 
-  public Member(MemberForm memberForm) {
-    this.name = memberForm.getName();
+  @OneToOne(fetch = LAZY)
+  @JoinColumn(name = "email_id")
+  private VerifyEmail verifyEmail;
+
+  public Member(MemberForm memberForm, VerifyEmail verifyEmail) {
+    this.email = memberForm.getEmail();
     this.iflandNickName = memberForm.getIflandNickName();
     this.password = memberForm.getPassword();
+    this.verifyEmail = verifyEmail;
   }
-
 }

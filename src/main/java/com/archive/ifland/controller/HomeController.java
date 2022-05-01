@@ -31,7 +31,9 @@ public class HomeController {
   }
 
   @GetMapping("/sign-up")
-  public String signUp() {
+  public String signUp(Model model) {
+    model.addAttribute("memberForm", new MemberForm());
+
     return "main/signup";
   }
 

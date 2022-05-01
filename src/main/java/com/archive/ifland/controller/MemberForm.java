@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 public class MemberForm {
 
   @NotEmpty(message = "이름은 반드시 입력해야 합니다.")
-  private String name;
+  private String email;
 
   private String iflandNickName;
 
