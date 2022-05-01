@@ -3,9 +3,6 @@ package com.archive.ifland.dto;
 import com.archive.ifland.domain.Member;
 import lombok.Data;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 @Data
 public class MemberDto {
 
@@ -14,10 +11,6 @@ public class MemberDto {
   private String iflandNickName;
 
   private String verifiedLink;
-
-  @OneToOne
-  @JoinColumn(name = "member_id")
-  private Member member;
 
   public MemberDto(Member member) {
     this.email = member.getEmail();
