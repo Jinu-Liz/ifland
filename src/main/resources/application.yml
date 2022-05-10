@@ -1,10 +1,13 @@
+server:
+  port: 9090
+
 spring:
   datasource:
 #    ifland:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/ifland_dic?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: yun0587
+    url: jdbc:mysql://${DB_ADDRESS}:${DB_PORT}/ifland_wiki?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   # JPA 설정
   jpa:
