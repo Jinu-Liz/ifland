@@ -15,6 +15,6 @@ public class MemberDto {
   public MemberDto(Member member) {
     this.email = member.getEmail();
     this.iflandNickName = member.getIflandNickName();
-    this.verifiedLink = "http://localhost:9090/api/v1/auth/confirm?user=" + member.getId();
+    this.verifiedLink = "http://localhost:9090/api/v1/auth/confirm?user=" + member.getId() + "&authCode=" + member.getVerifyEmail().getAuthCode();
   }
 }
