@@ -24,8 +24,15 @@ public class MailAuthController {
     Optional<Member> member = memberRepository.findById(id);
     member.ifPresent(m -> {
       if (!m.getVerifyEmail().getAuthCode().equals(authCode)) throw new Error("인증 실패");
+      m.setVerified(true);
+      memberRepository.save(m);
     });
 
-    return "redirect:";
+    return "auth/redirect";
+  }
+
+  @GetMapping("/auth/verified")
+  public String verified() {
+    return "auth/verify";
   }
 }

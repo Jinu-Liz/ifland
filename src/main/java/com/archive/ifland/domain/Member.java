@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
@@ -37,4 +36,9 @@ public class Member extends BaseTimeEntity {
     this.password = memberForm.getPassword();
     this.verifyEmail = verifyEmail;
   }
+
+  public void setVerified(boolean verified) {
+    if (verified) this.verifyEmail.confirmVerified();
+  }
+
 }

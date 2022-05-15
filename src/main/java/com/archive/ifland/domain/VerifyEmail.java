@@ -29,4 +29,8 @@ public class VerifyEmail {
   public VerifyEmail(String authCode) {
     this.authCode = authCode;
   }
+
+  public void confirmVerified() {
+    isVerified = "Y";
+  }
 }
