@@ -70,3 +70,22 @@ spring:
 #        type:
 #          descriptor:
 #            sql: trace
+
+# 카오스 몽키
+  profiles:
+    active: chaos-monkey
+
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: false
+
+  endpoints:
+    web:
+      exposure:
+        include: health,info,chaosmonkey
+
+chaos:
+  monkey:
+    watcher:
+      repository: true

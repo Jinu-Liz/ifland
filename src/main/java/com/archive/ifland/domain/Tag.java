@@ -10,7 +10,8 @@ import static javax.persistence.GenerationType.*;
 @Entity @Getter
 public class Tag extends BaseTimeEntity {
 
-  @Id @GeneratedValue(strategy = IDENTITY)
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
   @Column(name = "tag_id")
   private Long id;
 

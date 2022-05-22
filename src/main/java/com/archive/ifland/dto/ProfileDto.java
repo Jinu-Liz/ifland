@@ -27,9 +27,13 @@ public class ProfileDto {
 
   private String blog;
 
-  private List<Like> likes;
+  private List<LikeDto> likes;
 
-  private List<Hate> hates;
+  private String likesToString;
+
+  private List<HateDto> hates;
+
+  private String hatesToString;
 
   private List<TagDto> tags;
 
@@ -45,8 +49,6 @@ public class ProfileDto {
     this.instagram = profile.getInstagram();
     this.facebook = profile.getFacebook();
     this.blog = profile.getBlog();
-    this.likes = profile.getLikes();
-    this.hates = profile.getHates();
 
     List<TagDto> tagDtoList = new ArrayList<>();
     for (Tag tag : profile.getTags()) {
@@ -58,7 +60,37 @@ public class ProfileDto {
       tagDtoList.add(tagDto);
     }
 
+    List<LikeDto> likeDtoList = new ArrayList<>();
+    StringBuilder likeSb = new StringBuilder();
+    for (int i = 0; i < profile.getLikes().size(); i++) {
+      Like like = profile.getLikes().get(i);
+      LikeDto likeDto = new LikeDto();
+      likeDto.setId(like.getId());
+      likeDto.setLikeThing(like.getLike());
+      likeDtoList.add(likeDto);
+
+      if (i != 0) likeSb.append(", ");
+      likeSb.append(like.getLike());
+    }
+
+    List<HateDto> hateDtoList = new ArrayList<>();
+    StringBuilder hateSb = new StringBuilder();
+    for (int i = 0; i < profile.getHates().size(); i++) {
+      Hate hate = profile.getHates().get(i);
+      HateDto hateDto = new HateDto();
+      hateDto.setId(hate.getId());
+      hateDto.setHateThing(hate.getHate());
+      hateDtoList.add(hateDto);
+
+      if (i != 0) hateSb.append(", ");
+      hateSb.append(hate.getHate());
+    }
+
     this.tags = tagDtoList;
+    this.likes = likeDtoList;
+    this.hates = hateDtoList;
+    this.likesToString = likeSb.toString();
+    this.hatesToString = hateSb.toString();
     this.likeCount = profile.getLikeCount();
     this.viewCount = profile.getViewCount();
   }

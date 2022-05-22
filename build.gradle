@@ -65,6 +65,9 @@ dependencies {
     /* 이메일 전송 */
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+    /* Chaos Monkey */
+//    implementation 'de.codecentric:chaos-monkey-spring-boot:2.6.1'
+
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
