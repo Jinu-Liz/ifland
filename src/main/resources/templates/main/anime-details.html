@@ -71,11 +71,31 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>블로그:</span> -</li>
-                                            <li><span>인스타그램:</span> <a href="https://www.instagram.com/jinu_liz" target="_blank">https://www.instagram.com/jinu_liz</a></li>
-                                            <li><span>페이스북:</span> -</li>
-                                            <li><span>카카오뷰:</span> -</li>
-                                            <li><span>오픈채팅:</span> <a href="https://open.kakao.com/o/sr72dG0d" target="_blank">https://open.kakao.com/o/sr72dG0d</a></li>
+                                            <li>
+                                                <span>블로그:</span>
+                                                <a th:if="${profile.blog} != null" th:href="${profile.blog}" target="_blank" th:text="${profile.blog}"></a>
+                                                <a th:unless="${profile.blog} != null">-</a>
+                                            </li>
+                                            <li>
+                                                <span>인스타그램:</span>
+                                                <a th:if="${profile.instagram} != null" th:href="${profile.instagram}" target="_blank" th:text="${profile.instagram}"></a>
+                                                <a th:unless="${profile.instagram} != null">-</a>
+                                            </li>
+                                            <li>
+                                                <span>페이스북:</span>
+                                                <a th:if="${profile.facebook} != null" th:href="${profile.facebook}" target="_blank" th:text="${profile.facebook}"></a>
+                                                <a th:unless="${profile.facebook} != null">-</a>
+                                            </li>
+                                            <li>
+                                                <span>카카오뷰:</span>
+                                                <a th:if="${profile.kakaoView} != null" th:href="${profile.kakaoView}" target="_blank" th:text="${profile.kakaoView}"></a>
+                                                <a th:unless="${profile.kakaoView} != null">-</a>
+                                            </li>
+                                            <li>
+                                                <span>오픈채팅:</span>
+                                                <a th:if="${profile.openKakao} != null" th:href="${profile.openKakao}" target="_blank" th:text="${profile.openKakao}"></a>
+                                                <a th:unless="${profile.openKakao} != null">-</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

@@ -27,6 +27,10 @@ public class ProfileDto {
 
   private String blog;
 
+  private String kakaoView;
+
+  private String openKakao;
+
   private List<LikeDto> likes;
 
   private String likesToString;
@@ -49,6 +53,8 @@ public class ProfileDto {
     this.instagram = profile.getInstagram();
     this.facebook = profile.getFacebook();
     this.blog = profile.getBlog();
+    this.kakaoView = profile.getKakaoView();
+    this.openKakao = profile.getOpenKakao();
 
     List<TagDto> tagDtoList = new ArrayList<>();
     for (Tag tag : profile.getTags()) {

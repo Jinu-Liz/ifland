@@ -31,6 +31,10 @@ public class ProfileForm {
 
   private String blog;
 
+  private String kakaoView;
+
+  private String openKakao;
+
   private List<Tag> tags = new ArrayList<>();
 
 }
