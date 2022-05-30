@@ -16,6 +16,14 @@ public class ProfileForm {
   @NotEmpty(message = "닉네임은 반드시 입력해야 합니다.")
   private String iflandNickName;
 
+  private String ifStartYear;
+
+  private String ifStartMonth;
+
+  private String mbti;
+
+  private String team;
+
   private String image;
 
   private List<Like> likes = new ArrayList<>();

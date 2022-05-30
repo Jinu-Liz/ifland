@@ -17,6 +17,14 @@ public class ProfileDto {
 
   private String iflandNickName;
 
+  private String ifStartYear;
+
+  private String ifStartMonth;
+
+  private String mbti;
+
+  private String team;
+
   private String image;
 
   private String contents;
@@ -48,6 +56,10 @@ public class ProfileDto {
   public ProfileDto(Profile profile) {
     this.id = profile.getId();
     this.iflandNickName = profile.getIflandNickName();
+    this.ifStartYear = profile.getIfStartYear();
+    this.ifStartMonth = profile.getIfStartMonth();
+    this.mbti = profile.getMbti();
+    this.team = profile.getTeam();
     this.image = StringUtils.hasText(profile.getImage()) ? profile.getImage() : "/images/profile/basic-profile-img.png";
     this.contents = profile.getContents();
     this.instagram = profile.getInstagram();

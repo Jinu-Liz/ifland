@@ -24,6 +24,14 @@ public class Profile extends BaseTimeEntity {
 
   private String iflandNickName;
 
+  private String ifStartYear;
+
+  private String ifStartMonth;
+
+  private String mbti;
+
+  private String team;
+
   private String image;
 
   private String contents;
@@ -57,6 +65,10 @@ public class Profile extends BaseTimeEntity {
 
   public Profile(ProfileForm profileForm) {
     iflandNickName = profileForm.getIflandNickName();
+    ifStartYear = profileForm.getIfStartYear();
+    ifStartMonth = profileForm.getIfStartMonth();
+    mbti = profileForm.getMbti();
+    team = profileForm.getTeam();
     image = profileForm.getImage();
     contents = profileForm.getContents();
     likes = profileForm.getLikes();

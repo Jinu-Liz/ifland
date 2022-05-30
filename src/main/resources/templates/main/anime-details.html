@@ -62,9 +62,9 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>IF 시작일: </span>2021년 10월</li>
-                                            <li><span>MBTI: </span>ISTP</li>
-                                            <li><span>소속: </span>중립</li>
+                                            <li><span>IF 시작일: </span><span style="color: #ffffff" th:text="|${profile.ifStartYear}년 ${profile.ifStartMonth}월|"></span></li>
+                                            <li><span>MBTI: </span><span style="color: #ffffff" th:text="${profile.mbti}"></span></li>
+                                            <li><span>소속: </span><span style="color: #ffffff" th:text="${profile.team}"></span></li>
                                             <li><span>좋아하는 것: </span><div th:text="${profile.likesToString}"></div></li>
                                             <li><span>싫어하는 것: </span><div th:text="${profile.hatesToString}"></div></li>
                                         </ul>
@@ -78,7 +78,7 @@
                                             </li>
                                             <li>
                                                 <span>인스타그램:</span>
-                                                <a th:if="${profile.instagram} != null" th:href="${profile.instagram}" target="_blank" th:text="${profile.instagram}"></a>
+                                                <a th:if="${profile.instagram} != null" th:href="|https://www.instagram.com/${profile.instagram}|" target="_blank" th:text="|@${profile.instagram}|"></a>
                                                 <a th:unless="${profile.instagram} != null">-</a>
                                             </li>
                                             <li>
