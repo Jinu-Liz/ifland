@@ -71,7 +71,7 @@ public class ProfileController {
 
   @GetMapping("/category")
   public String category(Model model,
-                         @PageableDefault(size = 1) Pageable pageable,
+                         @PageableDefault(size = 9) Pageable pageable,
                          @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                          @RequestParam(required = false, value = "keyword") String keyword) {
 
