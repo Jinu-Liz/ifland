@@ -78,6 +78,7 @@ public class ProfileServiceImpl implements ProfileService {
       queryFactory
         .selectFrom(profile)
         .leftJoin(profile.tags, tag1)
+        .orderBy(profile.createdDate.desc())
         .fetchJoin()
         .distinct()
         .limit(count)
