@@ -25,4 +25,6 @@ public interface ProfileService {
 
   ProfileDto findIflander(Long id);
 
+  List<ProfileDto> getRecommendList(Long id);
+
 }

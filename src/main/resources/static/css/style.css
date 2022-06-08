@@ -790,10 +790,10 @@ ol {
 	margin-bottom: 20px;
 }
 
-.product__sidebar__view__item .ep {
+.product__sidebar__view__item .like {
 	font-size: 13px;
 	color: #ffffff;
-	background: #e53637;
+	background: #3d3d3d;
 	display: inline-block;
 	padding: 2px 12px;
 	border-radius: 4px;
@@ -817,9 +817,10 @@ ol {
 .product__sidebar__view__item h5 {
 	position: absolute;
 	left: 0;
-	bottom: 25px;
+	bottom: 5px;
 	width: 100%;
 	padding: 0 30px 0 20px;
+	color: white;
 }
 
 .product__sidebar__view__item h5 a {
@@ -986,7 +987,7 @@ ol {
 	position: relative;
 }
 
-.anime__details__pic .comment {
+.anime__details__pic .like {
 	font-size: 13px;
 	color: #ffffff;
 	background: #3d3d3d;

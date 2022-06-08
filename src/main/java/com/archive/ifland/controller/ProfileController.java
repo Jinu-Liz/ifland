@@ -17,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -63,8 +64,11 @@ public class ProfileController {
                        @PathVariable("id") Long id) {
 
     ProfileDto profile = profileService.findIflander(id);
+    List<ProfileDto> recommendList = profileService.getRecommendList(profile.getId());
 
     model.addAttribute("profile", profile);
+    model.addAttribute("recommendList", recommendList);
+    model.addAttribute("cp", "iflanderInfo");
 
     return "main/anime-details";
   }
