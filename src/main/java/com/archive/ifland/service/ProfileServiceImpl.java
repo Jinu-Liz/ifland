@@ -191,7 +191,6 @@ public class ProfileServiceImpl implements ProfileService {
   @Override
   public List<ProfileDto> getRecommendList(Long id) {
     List<ProfileDto> result = new ArrayList<>();
-
     List<Long> friendIdList =
       queryFactory
       .select(relation.friendId)
@@ -212,18 +211,33 @@ public class ProfileServiceImpl implements ProfileService {
         result.add(profileDto);
       }
 
-    } else {
-      List<ProfileDto> profileDtoList = selectProfiles();
-      Collections.shuffle(profileDtoList);
-      return profileDtoList.subList(0, 2);
-    }
+      if (result.size() < 2) result.addAll(getRandomProfile(1, id, friendIdList));
 
-    return result;
+      return result;
+    } else {
+      return getRandomProfile(2, id);
+    }
   }
 
   private BooleanExpression containsKeyword(String keyword) {
     if (!StringUtils.hasText(keyword)) return null;
 
     return profile.iflandNickName.contains(keyword);
+  }
+
+  // 자신을 제외한 1명 추가
+  private List<ProfileDto> getRandomProfile(int num, Long id) {
+    return getRandomProfile(num, id, new ArrayList<>());
+  }
+
+  private List<ProfileDto> getRandomProfile(int num, Long id, List<Long> fList) {
+    List<ProfileDto> profileDtoList = selectProfiles();
+    Collections.shuffle(profileDtoList);
+
+    return profileDtoList.stream()
+      .filter(pfd -> !id.equals(pfd.getId()))
+      .filter(pfd -> !fList.contains(pfd.getId()))
+      .limit(num)
+      .collect(Collectors.toList());
   }
 }
