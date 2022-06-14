@@ -1195,6 +1195,12 @@ ol {
 	border-radius: 2px;
 }
 
+.anime__details__form #comment-button {
+	position: absolute;
+	right: 15px;
+	top: 0;
+}
+
 /*---------------------
   Anime Watching
 -----------------------*/
