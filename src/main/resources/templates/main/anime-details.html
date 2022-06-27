@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- Header Section Begin -->
 <th:block th:replace="fragments/header :: header"/>
+<script th:src="@{/js/profile/detail.js}"></script>
 <!-- Header Section End -->
 
 <body>
@@ -115,7 +116,7 @@
                                 <h5>Write Comment</h5>
                             </div>
                             <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
+                                <textarea id="comment" placeholder="300자 이내로 작성해주세요."></textarea>
                                 <button id="comment-button" type="submit"><i class="fa fa-location-arrow"></i> Comment</button>
                             </form>
                         </div>
