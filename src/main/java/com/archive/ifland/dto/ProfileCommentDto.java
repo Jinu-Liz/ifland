@@ -4,7 +4,7 @@ import com.archive.ifland.domain.ProfileComment;
 import lombok.Data;
 
 @Data
-public class ProfileCommentResponse {
+public class ProfileCommentDto {
 
   private Long commentId;
 
@@ -14,7 +14,7 @@ public class ProfileCommentResponse {
 
   private String createdDate;
 
-  public ProfileCommentResponse(ProfileComment profileComment) {
+  public ProfileCommentDto(ProfileComment profileComment) {
     this.commentId = profileComment.getId();
     this.iflandNickName = profileComment.getMember().getIflandNickName();
     this.contents = profileComment.getContents();

@@ -3,7 +3,7 @@ package com.archive.ifland.service;
 import com.archive.ifland.domain.Member;
 import com.archive.ifland.domain.Profile;
 import com.archive.ifland.domain.ProfileComment;
-import com.archive.ifland.dto.ProfileCommentResponse;
+import com.archive.ifland.dto.ProfileCommentDto;
 import com.archive.ifland.dto.ProfileDto;
 import com.archive.ifland.repository.MemberRepository;
 import com.archive.ifland.repository.ProfileCommentRepository;
@@ -120,8 +120,8 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
-  public ProfileCommentResponse writeComment(String contents) {
-    ProfileCommentResponse result = null;
+  public ProfileCommentDto writeComment(String contents) {
+    ProfileCommentDto result = null;
     Profile profile = profileRepository.findAll().get(0);
     Member member = memberRepository.findAll().get(0);
     if (StringUtils.hasText(contents)) {
@@ -129,7 +129,7 @@ public class ProfileServiceImpl implements ProfileService {
       Long id = profileCommentRepository.save(newProfileComment).getId();
 
       ProfileComment profileComment = profileCommentRepository.getById(id);
-      result = new ProfileCommentResponse(profileComment);
+      result = new ProfileCommentDto(profileComment);
     }
 
     return result;

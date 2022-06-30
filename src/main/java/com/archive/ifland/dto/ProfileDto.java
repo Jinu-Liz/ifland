@@ -1,9 +1,6 @@
 package com.archive.ifland.dto;
 
-import com.archive.ifland.domain.Hate;
-import com.archive.ifland.domain.Like;
-import com.archive.ifland.domain.Profile;
-import com.archive.ifland.domain.Tag;
+import com.archive.ifland.domain.*;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -70,11 +67,7 @@ public class ProfileDto {
 
     List<TagDto> tagDtoList = new ArrayList<>();
     for (Tag tag : profile.getTags()) {
-      TagDto tagDto = new TagDto();
-      String rgba = StringUtils.hasText(tag.getRgba()) ? tag.getRgba() : "255, 255, 255, 0.2";
-      tagDto.setId(tag.getId());
-      tagDto.setTag(tag.getTag());
-      tagDto.setRgba(rgba);
+      TagDto tagDto = new TagDto(tag);
       tagDtoList.add(tagDto);
     }
 
@@ -82,9 +75,7 @@ public class ProfileDto {
     StringBuilder likeSb = new StringBuilder();
     for (int i = 0; i < profile.getLikes().size(); i++) {
       Like like = profile.getLikes().get(i);
-      LikeDto likeDto = new LikeDto();
-      likeDto.setId(like.getId());
-      likeDto.setLikeThing(like.getLike());
+      LikeDto likeDto = new LikeDto(like);
       likeDtoList.add(likeDto);
 
       if (i != 0) likeSb.append(", ");
@@ -95,9 +86,7 @@ public class ProfileDto {
     StringBuilder hateSb = new StringBuilder();
     for (int i = 0; i < profile.getHates().size(); i++) {
       Hate hate = profile.getHates().get(i);
-      HateDto hateDto = new HateDto();
-      hateDto.setId(hate.getId());
-      hateDto.setHateThing(hate.getHate());
+      HateDto hateDto = new HateDto(hate);
       hateDtoList.add(hateDto);
 
       if (i != 0) hateSb.append(", ");

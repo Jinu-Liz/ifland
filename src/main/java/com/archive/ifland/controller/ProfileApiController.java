@@ -1,6 +1,6 @@
 package com.archive.ifland.controller;
 
-import com.archive.ifland.dto.ProfileCommentResponse;
+import com.archive.ifland.dto.ProfileCommentDto;
 import com.archive.ifland.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class ProfileApiController {
   }
 
   @PostMapping("/comment")
-  public ProfileCommentResponse comment(String content) {
+  public ProfileCommentDto comment(String content) {
 
     return profileService.writeComment(content);
   }
