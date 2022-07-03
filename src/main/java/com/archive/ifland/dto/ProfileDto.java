@@ -106,6 +106,7 @@ public class ProfileDto {
     this.hates = hateDtoList;
     this.likesToString = likeSb.toString();
     this.hatesToString = hateSb.toString();
+    this.comments = commentList;
     this.likeCount = profile.getLikeCount();
     this.viewCount = profile.getViewCount();
   }
