@@ -129,7 +129,7 @@
                                     <img src="img/anime/review-1.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
-                                    <h6><span th:text="${comment.iflandNickName}" style="color: #ffffff"></span><span> - 1시간 전</span></h6>
+                                    <h6><span th:text="${comment.iflandNickName}" style="color: #ffffff"></span><span th:text="| - ${comment.dayAgo}|"></span></h6>
                                     <p th:text="${comment.contents}"></p>
                                 </div>
                             </div>

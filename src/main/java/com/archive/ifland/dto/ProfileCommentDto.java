@@ -1,10 +1,13 @@
 package com.archive.ifland.dto;
 
+import com.archive.ifland.CommonUtils;
 import com.archive.ifland.domain.ProfileComment;
 import lombok.Data;
 
 @Data
 public class ProfileCommentDto {
+
+  private static CommonUtils commonUtils;
 
   private Long commentId;
 
@@ -14,11 +17,16 @@ public class ProfileCommentDto {
 
   private String createdDate;
 
+  private String dayAgo;
+
   public ProfileCommentDto(ProfileComment profileComment) {
     this.commentId = profileComment.getId();
     this.iflandNickName = profileComment.getMember().getIflandNickName();
     this.contents = profileComment.getContents();
     this.createdDate = profileComment.getCreatedDate();
+
+    CommonUtils commonUtils = new CommonUtils();
+    dayAgo = commonUtils.getTimeAgo(createdDate);
   }
 
 }
