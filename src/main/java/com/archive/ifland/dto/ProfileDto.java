@@ -46,6 +46,8 @@ public class ProfileDto {
 
   private List<TagDto> tags;
 
+  private List<ProfileCommentDto> comments;
+
   private int likeCount;
 
   private int viewCount;
@@ -69,6 +71,12 @@ public class ProfileDto {
     for (Tag tag : profile.getTags()) {
       TagDto tagDto = new TagDto(tag);
       tagDtoList.add(tagDto);
+    }
+
+    List<ProfileCommentDto> commentList = new ArrayList<>();
+    for (ProfileComment comment : profile.getComments()) {
+      ProfileCommentDto commentDto = new ProfileCommentDto(comment);
+      commentList.add(commentDto);
     }
 
     List<LikeDto> likeDtoList = new ArrayList<>();
