@@ -5,6 +5,7 @@ import com.archive.ifland.domain.Profile;
 import com.archive.ifland.domain.ProfileComment;
 import com.archive.ifland.dto.ProfileCommentDto;
 import com.archive.ifland.dto.ProfileDto;
+import com.archive.ifland.exception.NotEnoughCountException;
 import com.archive.ifland.repository.MemberRepository;
 import com.archive.ifland.repository.ProfileCommentRepository;
 import com.archive.ifland.repository.ProfileRepository;
@@ -95,27 +96,39 @@ public class ProfileServiceImpl implements ProfileService {
   @Override
   public void plusLikeCount(Long id) {
     Optional<Profile> profileOptional = profileRepository.findById(id);
-    profileOptional.ifPresent(profile -> {
-      profile.plusLikeCount();
-      profileRepository.save(profile);
+    profileOptional.ifPresent(pf -> {
+
+      queryFactory
+        .update(profile)
+        .set(profile.likeCount, (pf.getLikeCount() + 1))
+        .where(profile.id.eq(pf.getId()))
+        .execute();
     });
   }
 
   @Override
   public void minusLikeCount(Long id) {
     Optional<Profile> profileOptional = profileRepository.findById(id);
-    profileOptional.ifPresent(profile -> {
-      profile.minusLikeCount();
-      profileRepository.save(profile);
+    profileOptional.ifPresent(pf -> {
+      if (pf.getLikeCount() <= 0) throw new NotEnoughCountException("좋아요 수가 0보다 작음");
+
+      queryFactory
+        .update(profile)
+        .set(profile.likeCount, (pf.getLikeCount() - 1))
+        .where(profile.id.eq(pf.getId()))
+        .execute();
     });
   }
 
   @Override
   public void plusViewCount(Long id) {
     Optional<Profile> profileOptional = profileRepository.findById(id);
-    profileOptional.ifPresent(profile -> {
-      profile.plusViewCount();
-      profileRepository.save(profile);
+    profileOptional.ifPresent(pf -> {
+      queryFactory
+        .update(profile)
+          .set(profile.viewCount, (pf.getViewCount() + 1))
+          .where(profile.id.eq(pf.getId()))
+          .execute();
     });
   }
 

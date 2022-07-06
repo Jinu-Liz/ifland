@@ -81,18 +81,4 @@ public class Profile extends BaseTimeEntity {
     tags = profileForm.getTags();
   }
 
-  public void plusLikeCount() {
-    this.likeCount = this.likeCount + 1;
-  }
-
-  public void minusLikeCount() {
-    int resultCnt = this.likeCount - 1;
-    if (resultCnt < 0) throw new NotEnoughCountException("좋아요 수가 0보다 작음");
-    this.likeCount = resultCnt;
-  }
-
-  public void plusViewCount() {
-    this.viewCount = this.viewCount + 1;
-  }
-
 }
