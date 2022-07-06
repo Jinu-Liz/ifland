@@ -19,7 +19,7 @@ public interface ProfileService {
 
   void plusViewCount(Long id);
 
-  ProfileCommentDto writeComment(String contents);
+  void writeComment(String contents);
 
   Page<ProfileDto> iflanderList(Pageable pageable, String keyword);
 

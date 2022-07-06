@@ -133,19 +133,13 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
-  public ProfileCommentDto writeComment(String contents) {
-    ProfileCommentDto result = null;
+  public void writeComment(String contents) {
     Profile profile = profileRepository.findAll().get(0);
     Member member = memberRepository.findAll().get(0);
     if (StringUtils.hasText(contents)) {
       ProfileComment newProfileComment = new ProfileComment(profile, member, contents);
-      Long id = profileCommentRepository.save(newProfileComment).getId();
-
-      ProfileComment profileComment = profileCommentRepository.getById(id);
-      result = new ProfileCommentDto(profileComment);
+      profileCommentRepository.save(newProfileComment);
     }
-
-    return result;
   }
 
   @Override

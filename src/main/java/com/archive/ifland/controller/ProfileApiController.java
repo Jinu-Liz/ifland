@@ -1,7 +1,8 @@
 package com.archive.ifland.controller;
 
-import com.archive.ifland.dto.ProfileCommentDto;
 import com.archive.ifland.service.ProfileService;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,19 +22,20 @@ public class ProfileApiController {
 
   }
 
-  @PostMapping("/like/plus")
+  @PatchMapping("/like/plus")
   public void plusLikeCount(@RequestParam Long id) {
     profileService.plusLikeCount(id);
   }
 
-  @PostMapping("/like/minus")
+  @PatchMapping("/like/minus")
   public void minusLikeCount(@RequestParam Long id) {
     profileService.minusLikeCount(id);
   }
 
   @PostMapping("/comment")
-  public ProfileCommentDto comment(String content) {
-
-    return profileService.writeComment(content);
+  public void writeComment(@RequestBody String data) {
+    JsonParser parser = new JsonParser();
+    JsonObject obj = parser.parse(data).getAsJsonObject();
+    profileService.writeComment(obj.get("contents").getAsString());
   }
 }

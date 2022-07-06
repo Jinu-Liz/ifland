@@ -115,9 +115,9 @@
                             <div class="section-title">
                                 <h5>Write Comment</h5>
                             </div>
-                            <form id="comment-form" action="#">
+                            <form id="comment-form" onsubmit="return false;">
                                 <textarea id="comment" placeholder="300자 이내로 작성해주세요."></textarea>
-                                <button id="comment-button" type="submit"><i class="fa fa-location-arrow"></i> Comment</button>
+                                <button id="comment-button" onclick="writeComment();"><i class="fa fa-location-arrow"></i> Comment</button>
                             </form>
                         </div>
                         <div class="anime__details__review">

@@ -27,3 +27,19 @@ const buttonDisabled = function (commentBtn) {
   commentBtn.attr('disabled', true);
   commentBtn.css("background", "#dee2e6");
 }
+
+const writeComment = function () {
+  const comment = $("#comment").val();
+  let data = { contents: comment };
+  fetch(
+      "/api/profile/comment",
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+  // Comment창 재조회하는 로직 구현해야함
+}
