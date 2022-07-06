@@ -126,7 +126,7 @@
                             </div>
                             <div class="anime__review__item" th:each="comment : ${profile.comments}">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-1.jpg" alt="">
+                                    <img th:src="@{/images/profile/basic-profile-img.png}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6><span th:text="${comment.iflandNickName}" style="color: #ffffff"></span><span th:text="| - ${comment.dayAgo}|"></span></h6>
