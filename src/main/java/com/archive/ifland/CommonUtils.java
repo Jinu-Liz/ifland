@@ -27,9 +27,7 @@ public class CommonUtils {
 
     String result = "";
     if (yearAgo == 0) {
-      result = monthAgo + "개월 전";
       if (monthAgo == 0) {
-        result = dayAgo + "일 전";
         if (dayAgo == 0) {
           result = hourAgo + "시간 전";
         } else {
