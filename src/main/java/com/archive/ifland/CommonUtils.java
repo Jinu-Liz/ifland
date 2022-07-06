@@ -9,10 +9,12 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class CommonUtils {
 
+  // 랜덤 코드 생성
   public String makeRandomCode() {
     return RandomStringUtils.random(20, 33, 125, true, true);
   }
 
+  // 날짜 계산
   public String getTimeAgo(String time) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
     LocalDateTime curTime = LocalDateTime.now();
