@@ -64,6 +64,7 @@ public class ProfileController {
                        @PathVariable("id") Long id) {
 
     ProfileDto profile = profileService.findIflander(id);
+    profileService.plusViewCount(id);
     List<ProfileDto> recommendList = profileService.getRecommendList(profile.getId());
 
     model.addAttribute("profile", profile);

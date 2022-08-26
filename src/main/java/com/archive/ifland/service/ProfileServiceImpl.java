@@ -3,7 +3,6 @@ package com.archive.ifland.service;
 import com.archive.ifland.domain.Member;
 import com.archive.ifland.domain.Profile;
 import com.archive.ifland.domain.ProfileComment;
-import com.archive.ifland.dto.ProfileCommentDto;
 import com.archive.ifland.dto.ProfileDto;
 import com.archive.ifland.exception.NotEnoughCountException;
 import com.archive.ifland.repository.MemberRepository;
@@ -168,7 +167,6 @@ public class ProfileServiceImpl implements ProfileService {
   @Override
   public ProfileDto findIflander(Long id) {
     Optional<Profile> optional = profileRepository.findById(id);
-    plusViewCount(id);
 
     return optional.map(ProfileDto::new).orElseThrow();
   }
