@@ -15,7 +15,6 @@ $(document).ready(function () {
   })
 
   if (comment.val().isEmpty()) buttonDisabled(commentBtn);
-
 })
 
 const buttonActive = function (commentBtn) {
@@ -29,8 +28,10 @@ const buttonDisabled = function (commentBtn) {
 }
 
 const writeComment = function () {
-  const comment = $("#comment").val();
-  let data = { contents: comment };
+  const comment = $('#comment');
+  const commentBtn = $("#comment-button");
+  const content = comment.val();
+  let data = { contents: content };
   fetch(
       "/api/profile/comment",
       {
@@ -39,7 +40,39 @@ const writeComment = function () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-      });
+      })
+      .then(
+          () => makeCommentHtml()
+      );
 
-  // Comment창 재조회하는 로직 구현해야함
+  comment.val('');
+  buttonDisabled(commentBtn);
+}
+
+const makeCommentHtml = function () {
+  fetch('/api/profile/detail?id=1')
+      .then(res => res.json())
+      .then(data => {
+        let html = "";
+        html += '<div class="section-title">';
+        html +=   '<h5>Comment</h5>';
+        html += '</div>';
+
+        const arr = data.comments;
+        arr.forEach((comment, idx) => {
+          let recentComment = idx === 0;
+          html += '<div class="anime__review__item">';
+          (recentComment) ? html +=   '<div class="anime__review__item__pic last__comment">' : html +=   '<div class="anime__review__item__pic">';
+          html +=     '<img src="/images/profile/basic-profile-img.png" alt="">';
+          html +=   '</div>';
+          (recentComment) ? html += '<div class="anime__review__item__text" style="background-color: dimgray;">' : html += '<div class="anime__review__item__text">';
+          html +=     '<h6><span style="color: #ffffff"></span>' + comment.iflandNickName + '<span> - ' + comment.dayAgo + '</span></h6>';
+          html +=     '<p>' + comment.contents + '</p>';
+          html +=   '</div>';
+          html += '</div>';
+        });
+
+        $('#commentDiv').html(html);
+
+      });
 }

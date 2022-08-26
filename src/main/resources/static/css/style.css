@@ -1146,6 +1146,10 @@ ol {
 	border-radius: 50%;
 }
 
+.last__comment:before {
+	border-left: 15px solid dimgray;
+}
+
 .anime__review__item__text {
 	overflow: hidden;
 	background: #1d1e39;
