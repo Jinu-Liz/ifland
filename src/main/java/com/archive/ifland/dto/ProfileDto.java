@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -78,6 +79,8 @@ public class ProfileDto {
       ProfileCommentDto commentDto = new ProfileCommentDto(comment);
       commentList.add(commentDto);
     }
+
+    Collections.reverse(commentList);   // List 뒤집어서 최신순 정렬.
 
     List<LikeDto> likeDtoList = new ArrayList<>();
     StringBuilder likeSb = new StringBuilder();

@@ -1,5 +1,6 @@
 package com.archive.ifland.controller;
 
+import com.archive.ifland.dto.ProfileDto;
 import com.archive.ifland.service.ProfileService;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -37,5 +38,10 @@ public class ProfileApiController {
     JsonParser parser = new JsonParser();
     JsonObject obj = parser.parse(data).getAsJsonObject();
     profileService.writeComment(obj.get("contents").getAsString());
+  }
+
+  @GetMapping("/detail")
+  public ProfileDto selComment(@RequestParam Long id) {
+    return profileService.findIflander(id);
   }
 }
