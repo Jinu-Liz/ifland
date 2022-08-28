@@ -35,4 +35,9 @@ public class MailAuthController {
   public String verified() {
     return "auth/verify";
   }
+
+  @GetMapping("/auth/verifying")
+  public String verifying() {
+    return "auth/verifying";
+  }
 }

@@ -2367,3 +2367,8 @@ ol {
 		padding: 18px 20px 20px;
 	}
 }
+
+.fieldError {
+	color: white;
+	margin-bottom: 5px;
+}

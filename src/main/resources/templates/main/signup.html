@@ -35,14 +35,17 @@
                     <div class="login__form">
                         <h3>회원가입</h3>
                         <form th:action="@{/members/new}" th:object="${memberForm}" method="post">
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">잘못된 데이터 입니다.</p>
                             <div class="input__item">
                                 <input type="email" th:field="*{email}" placeholder="이메일 주소">
                                 <span class="icon_mail"></span>
                             </div>
+                            <p th:if="${#fields.hasErrors('iflandNickName')}" th:errors="*{iflandNickName}" class="fieldError">잘못된 데이터 입니다.</p>
                             <div class="input__item">
                                 <input type="text" th:field="*{iflandNickName}" placeholder="이프랜드 아이디">
                                 <span class="icon_profile"></span>
                             </div>
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">잘못된 데이터 입니다.</p>
                             <div class="input__item">
                                 <input type="password" th:field="*{password}" placeholder="비밀번호">
                                 <span class="icon_lock"></span>

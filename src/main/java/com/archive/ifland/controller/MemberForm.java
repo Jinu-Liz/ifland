@@ -3,17 +3,20 @@ package com.archive.ifland.controller;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Getter @Setter
 public class MemberForm {
 
-  @NotEmpty(message = "이름은 반드시 입력해야 합니다.")
+  @NotBlank(message = "이메일을 입력해 주세요.")
+  @Email(message = "이메일 형식으로 입력해 주세요.")
   private String email;
 
+  @NotBlank(message = "닉네임을 입력해 주세요.")
   private String iflandNickName;
 
-  @NotEmpty(message = "패스워드는 반드시 입력해야 합니다.")
+  @NotBlank(message = "패스워드를 입력해 주세요.")
   private String password;
 
 }

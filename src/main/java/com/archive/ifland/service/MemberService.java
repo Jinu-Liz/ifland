@@ -4,6 +4,6 @@ import com.archive.ifland.controller.MemberForm;
 
 public interface MemberService {
 
-  public void createMember(MemberForm memberForm);
+  void createMember(MemberForm memberForm);
 
 }
