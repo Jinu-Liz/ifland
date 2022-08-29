@@ -7,14 +7,22 @@ import com.archive.ifland.domain.VerifyEmail;
 import com.archive.ifland.dto.MemberDto;
 import com.archive.ifland.repository.MemberRepository;
 import com.archive.ifland.repository.VerifyEmailRepository;
+import com.archive.ifland.service.account.UserAccount;
+import com.archive.ifland.service.account.UserRole;
 import com.archive.ifland.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl implements MemberService, UserDetailsService {
 
   private final MemberRepository memberRepository;
   private final VerifyEmailRepository veRepository;
@@ -29,7 +37,14 @@ public class MemberServiceImpl implements MemberService {
       VerifyEmail verifyEmail = new VerifyEmail(commonUtils.makeRandomCode());
       veRepository.save(verifyEmail);
 
-      Member member = new Member(memberForm, verifyEmail);
+      Member member = Member.builder()
+        .email(memberForm.getEmail())
+        .auth(UserRole.USER.name())
+        .password(passwordEncoder().encode(memberForm.getPassword()))
+        .iflandNickName(memberForm.getIflandNickName())
+        .verifyEmail(verifyEmail)
+        .build();
+
       memberRepository.save(member);
 
       MemberDto memberDto = new MemberDto(member);
@@ -42,4 +57,15 @@ public class MemberServiceImpl implements MemberService {
 
   }
 
+  @Override
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    Member member = memberRepository.findByEmail(email);
+    if (ObjectUtils.isEmpty(member)) throw new UsernameNotFoundException(email);
+
+    return new UserAccount(member);
+  }
+
+  public PasswordEncoder passwordEncoder() {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  }
 }

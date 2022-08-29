@@ -1,6 +1,7 @@
 package com.archive.ifland.domain;
 
-import com.archive.ifland.controller.MemberForm;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
+@Builder
 @Getter
 @Entity
 public class Member extends BaseTimeEntity {
@@ -26,16 +29,11 @@ public class Member extends BaseTimeEntity {
 
   private String password;
 
+  private String auth;
+
   @OneToOne(fetch = LAZY)
   @JoinColumn(name = "email_id")
   private VerifyEmail verifyEmail;
-
-  public Member(MemberForm memberForm, VerifyEmail verifyEmail) {
-    this.email = memberForm.getEmail();
-    this.iflandNickName = memberForm.getIflandNickName();
-    this.password = memberForm.getPassword();
-    this.verifyEmail = verifyEmail;
-  }
 
   public void setVerified(boolean verified) {
     if (verified) this.verifyEmail.confirmVerified();
