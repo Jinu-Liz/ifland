@@ -1,6 +1,7 @@
 package com.archive.ifland.controller.api;
 
 import com.archive.ifland.domain.Member;
+import com.archive.ifland.exception.AuthException;
 import com.archive.ifland.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class MailAuthController {
 
     Optional<Member> member = memberRepository.findById(id);
     member.ifPresent(m -> {
-      if (!m.getVerifyEmail().getAuthCode().equals(authCode)) throw new Error("인증 실패");
+      if (!m.getVerifyEmail().getAuthCode().equals(authCode)) throw new AuthException("인증 실패");
       m.setVerified(true);
       memberRepository.save(m);
     });
