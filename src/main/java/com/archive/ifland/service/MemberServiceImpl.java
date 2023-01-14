@@ -57,6 +57,19 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
   }
 
+  public void sendEmailForNewPassword(String account) {
+
+    try {
+
+      Member member = memberRepository.findByEmail(account);
+      MemberDto memberDto = new MemberDto(member);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
     Member member = memberRepository.findByEmail(email);

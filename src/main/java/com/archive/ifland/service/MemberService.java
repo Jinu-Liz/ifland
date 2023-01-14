@@ -6,4 +6,6 @@ public interface MemberService {
 
   void createMember(MemberForm memberForm);
 
+  void sendEmailForNewPassword(String account);
+
 }
