@@ -61,8 +61,18 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
     try {
 
-      Member member = memberRepository.findByEmail(account);
-      MemberDto memberDto = new MemberDto(member);
+      boolean existAccount = memberRepository.existsByEmail(account);
+
+      if (existAccount) {
+        VerifyEmail verifyEmail = new VerifyEmail(commonUtils.makeRandomCode());
+        veRepository.save(verifyEmail);
+
+        Member member = memberRepository.findByEmail(account);
+        MemberDto memberDto = new MemberDto(member);
+
+        emailService.sendMailForNewPassword(memberDto);
+
+      }
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -9,7 +9,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -41,15 +40,14 @@ public class EmailService {
     mailHandler.send();
   }
 
-  public void sendMailForNewPassword(String email) throws MessagingException {
+  public void sendMailForNewPassword(MemberDto member) throws MessagingException {
     EmailHandler mailHandler = new EmailHandler(mailSender);
 
-    mailHandler.setTo(email);
+    mailHandler.setTo(member.getEmail());
     mailHandler.setSubject("[IF-WIKI] 새로운 비밀번호 설정 메일 입니다.");
-    String passwordLink = "//localhost:9090/auth/new-password?id=";
     String html =
       "<div style='font-family:arial; width:100%; text-align:center; border:4px solid #888; border-radius:5px; width:500px; max-width:500px; margin:auto; padding:20px'>" +
-        " <p><a href='" + passwordLink + "' target='_blank'>여기를 눌러 새 비밀번호를 설정해주세요.</a></p>" +
+        " <p><a href='" + member.getNewPasswordLink() + "' target='_blank'>여기를 눌러 새 비밀번호를 설정해주세요.</a></p>" +
         "</div>";
     mailHandler.setText(html, true);
     mailHandler.send();
