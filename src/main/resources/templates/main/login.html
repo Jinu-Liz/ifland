@@ -85,23 +85,12 @@
                 console.log(res);
                 let success = res.value.success;
                 let error = res.value.error;
-                if (error.isNotEmpty()) {
-                    Swal.fire({
-                        icon: 'error',
-                        text: error,
-                        color: '#ffffff',
-                        background: '#212529',
-                        confirmButtonColor: '#e53637'
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'success',
-                        text: success,
-                        color: '#ffffff',
-                        background: '#212529',
-                        confirmButtonColor: '#e53637'
-                    })
-                }
+
+                if (res.value.status === "SUCCESS")
+                    Message.success(success);
+                else if (res.value.status === "FAIL")
+                    Message.error(error);
+
             }
         })
     }
