@@ -73,8 +73,35 @@
             preConfirm: (account) => {
                 let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
                 if (!regex.test(account)) Swal.showValidationMessage('올바른 이메일 형식이 아닙니다.');
-
-
+                return API.GetData('/api/login/find-password?account=' + account)
+                    .then(res => res.json())
+                    .catch(err => {
+                        Swal.showValidationMessage(err);
+                    })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then(res => {
+            if (res.isConfirmed) {
+                console.log(res);
+                let success = res.value.success;
+                let error = res.value.error;
+                if (error.isNotEmpty()) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: error,
+                        color: '#ffffff',
+                        background: '#212529',
+                        confirmButtonColor: '#e53637'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        text: success,
+                        color: '#ffffff',
+                        background: '#212529',
+                        confirmButtonColor: '#e53637'
+                    })
+                }
             }
         })
     }

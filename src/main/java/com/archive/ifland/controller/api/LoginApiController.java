@@ -1,5 +1,6 @@
 package com.archive.ifland.controller.api;
 
+import com.archive.ifland.dto.response.AuthResponse;
 import com.archive.ifland.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,9 @@ public class LoginApiController {
   private final MemberService memberService;
 
   @GetMapping("/find-password")
-  public void findPassword(@RequestParam String account) {
-    memberService.sendEmailForNewPassword(account);
+  public AuthResponse findPassword(@RequestParam String account) {
+    AuthResponse authResponse = memberService.sendEmailForNewPassword(account);
+    return authResponse;
 
   }
 

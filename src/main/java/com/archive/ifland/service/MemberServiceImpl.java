@@ -5,6 +5,7 @@ import com.archive.ifland.controller.MemberForm;
 import com.archive.ifland.domain.Member;
 import com.archive.ifland.domain.VerifyEmail;
 import com.archive.ifland.dto.MemberDto;
+import com.archive.ifland.dto.response.AuthResponse;
 import com.archive.ifland.repository.MemberRepository;
 import com.archive.ifland.repository.VerifyEmailRepository;
 import com.archive.ifland.service.account.UserAccount;
@@ -57,27 +58,35 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
   }
 
-  public void sendEmailForNewPassword(String account) {
+  public AuthResponse sendEmailForNewPassword(String account) {
 
+    AuthResponse authResponse = new AuthResponse();
     try {
 
       boolean existAccount = memberRepository.existsByEmail(account);
 
       if (existAccount) {
-        VerifyEmail verifyEmail = new VerifyEmail(commonUtils.makeRandomCode());
+        String authCode = commonUtils.makeRandomCode();
+        VerifyEmail verifyEmail = new VerifyEmail(authCode);
         veRepository.save(verifyEmail);
 
         Member member = memberRepository.findByEmail(account);
+        String passwordLink = "http://localhost:9090/mail/auth/new-password?user=" + member.getId() + "&authCode=" + authCode;
+
         MemberDto memberDto = new MemberDto(member);
-
+        memberDto.setNewPasswordLink(passwordLink);
         emailService.sendMailForNewPassword(memberDto);
-
+        authResponse.setSuccess("비밀번호 변경 메일이 전송되었습니다.");
+        return authResponse;
       }
 
+      authResponse.setError("해당 계정이 존재하지 않습니다.");
+      return authResponse;
     } catch (Exception e) {
       e.printStackTrace();
+      authResponse.setError("에러가 발생하였습니다. 관리자에게 문의하세요.");
+      return authResponse;
     }
-
   }
 
   @Override
