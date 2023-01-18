@@ -22,4 +22,15 @@ public class LoginApiController {
 
   }
 
+  @GetMapping("/change-password")
+  public AuthResponse changePassword(@RequestParam Long id,
+                                     @RequestParam String newPassword) {
+
+    AuthResponse authResponse = new AuthResponse();
+
+    return authResponse;
+//    AuthResponse authResponse = memberService.sendEmailForNewPassword(account);
+//    return authResponse;
+  }
+
 }

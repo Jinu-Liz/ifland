@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/header :: header"/>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+  <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<th:block th:replace="fragments/navigator :: navigator"/>
+<!-- Header End -->
+
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="normal__breadcrumb__text">
+          <h2>잘못된 인증입니다.</h2>
+          <p>올바른 방법으로 인증해주세요😂</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Normal Breadcrumb End -->
+
+<!-- Login Section Begin -->
+<section class="login spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="login__form">
+          <h3>로그인</h3>
+          <form th:action="@{/login-process}">
+            <div class="input__item">
+              <input type="email" placeholder="이메일 주소">
+              <span class="icon_mail"></span>
+            </div>
+            <div class="input__item">
+              <input type="password" placeholder="비밀번호">
+              <span class="icon_lock"></span>
+            </div>
+            <button type="submit" class="site-btn">Login</button>
+          </form>
+          <span style="cursor: pointer;" class="forget_pass" onclick="forgetPW();">비밀번호를 잊으셨나요?</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="login__register">
+          <h3>계정이 없으신가요?</h3>
+          <a th:href="@{/sign-up}" class="primary-btn">Register Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Login Section End -->
+
+<script>
+  function forgetPW() {
+    Swal.fire({
+      title: '찾으실 계정(이메일)을 입력해주세요.',
+      input: 'text',
+      color: '#ffffff',
+      background: '#212529',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#e53637',
+      confirmButtonText: '확인',
+      cancelButtonText: '취소',
+      preConfirm: (account) => {
+        let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+        if (!regex.test(account)) Swal.showValidationMessage('올바른 이메일 형식이 아닙니다.');
+        return API.GetData('/api/login/find-password?account=' + account)
+            .then(res => res.json())
+            .catch(err => {
+              Swal.showValidationMessage(err);
+            })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then(res => {
+      if (res.isConfirmed) {
+        console.log(res);
+        let success = res.value.success;
+        let error = res.value.error;
+
+        if (res.value.status === "SUCCESS")
+          Message.success(success);
+        else if (res.value.status === "FAIL")
+          Message.error(error);
+
+      }
+    })
+  }
+</script>
+</body>
+
+<!-- Footer Section Begin -->
+<th:block th:replace="fragments/footer :: footer"/>
+<!-- Footer Section End -->
+</html>
