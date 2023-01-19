@@ -1,9 +1,21 @@
+// 빈값 여부 판단
 isEmpty = function (str) {
-  return str === undefined || str === null || str === 'null' || str === '' || str.length === 0;
+  return (str === undefined || str === null || str === 'null' || str === '' || str.length === 0);
 }
 
+// 빈값X 여부 판단
 isNotEmpty = function (str) {
-  return str !== undefined || str !== null || str !== 'null' || str !== '' || str.length > 0;
+  return (str !== undefined || str !== null || str !== 'null' || str !== '' || str.length > 0);
+}
+
+// 문자 동일 여부 판단
+String.prototype.isEquals = function(str) {
+  return this == str;
+}
+
+// 문자 다름 여부 판단
+String.prototype.isNotEquals = function(str) {
+  return this != str;
 }
 
 class MsgType {
