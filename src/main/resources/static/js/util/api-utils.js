@@ -14,16 +14,6 @@ class API {
     return await fetch(url);
   }
 
-  static async GetData(url, data) {
-    return await fetch(
-        url,
-        {
-          method: METHOD.GET,
-          headers: HEADER,
-          body: JSON.stringify(data)
-        });
-  }
-
   static async PostData(url, data) {
     return await fetch(
         url,
