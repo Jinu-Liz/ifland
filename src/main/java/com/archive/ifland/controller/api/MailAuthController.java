@@ -70,9 +70,4 @@ public class MailAuthController {
     return "auth/verifying";
   }
 
-  @GetMapping("/auth/change-password")
-  public String changePassword() {
-    return "auth/change-password";
-  }
-
 }
