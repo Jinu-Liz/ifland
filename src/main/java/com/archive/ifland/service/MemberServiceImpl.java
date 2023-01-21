@@ -76,14 +76,18 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
         MemberDto memberDto = new MemberDto(member);
         memberDto.setNewPasswordLink(passwordLink);
         emailService.sendMailForNewPassword(memberDto);
+
+        authResponse.setStatus("SUCCESS");
         authResponse.setSuccess("비밀번호 변경 메일이 전송되었습니다.");
         return authResponse;
       }
 
+      authResponse.setStatus("FAIL");
       authResponse.setError("해당 계정이 존재하지 않습니다.");
       return authResponse;
     } catch (Exception e) {
       e.printStackTrace();
+      authResponse.setStatus("FAIL");
       authResponse.setError("에러가 발생하였습니다. 관리자에게 문의하세요.");
       return authResponse;
     }
