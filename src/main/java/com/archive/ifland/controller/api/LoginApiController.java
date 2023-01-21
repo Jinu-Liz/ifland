@@ -2,11 +2,10 @@ package com.archive.ifland.controller.api;
 
 import com.archive.ifland.dto.response.AuthResponse;
 import com.archive.ifland.service.MemberService;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,20 +16,18 @@ public class LoginApiController {
 
   @GetMapping("/find-password")
   public AuthResponse findPassword(@RequestParam String account) {
-    AuthResponse authResponse = memberService.sendEmailForNewPassword(account);
-    return authResponse;
 
+    return memberService.sendEmailForNewPassword(account);
   }
 
-  @GetMapping("/change-password")
-  public AuthResponse changePassword(@RequestParam Long id,
-                                     @RequestParam String newPassword) {
+  @PostMapping("/change-password")
+  public AuthResponse changePassword(@RequestBody String param) {
+    JsonParser jsonParser = new JsonParser();
+    JsonObject obj = jsonParser.parse(param).getAsJsonObject();
+    Long id = obj.get("id").getAsLong();
+    String newPassword = obj.get("password").getAsString();
 
-    AuthResponse authResponse = new AuthResponse();
-
-    return authResponse;
-//    AuthResponse authResponse = memberService.sendEmailForNewPassword(account);
-//    return authResponse;
+    return memberService.changePassword(id, newPassword);
   }
 
 }

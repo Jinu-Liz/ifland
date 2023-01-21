@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService, UserDetailsService {
@@ -84,6 +86,27 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
       authResponse.setStatus("FAIL");
       authResponse.setError("해당 계정이 존재하지 않습니다.");
+      return authResponse;
+    } catch (Exception e) {
+      e.printStackTrace();
+      authResponse.setStatus("FAIL");
+      authResponse.setError("에러가 발생하였습니다. 관리자에게 문의하세요.");
+      return authResponse;
+    }
+  }
+
+  public AuthResponse changePassword(Long id, String password) {
+    AuthResponse authResponse = new AuthResponse();
+
+    try {
+      Optional<Member> member = memberRepository.findById(id);
+      member.ifPresent(m -> {
+        m.changePassword(passwordEncoder().encode(password));
+        memberRepository.save(m);
+      });
+
+      authResponse.setStatus("SUCCESS");
+      authResponse.setSuccess("비밀번호 변경이 완료되었습니다.");
       return authResponse;
     } catch (Exception e) {
       e.printStackTrace();

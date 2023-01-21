@@ -9,4 +9,6 @@ public interface MemberService {
 
   AuthResponse sendEmailForNewPassword(String account);
 
+  AuthResponse changePassword(Long id, String password);
+
 }
