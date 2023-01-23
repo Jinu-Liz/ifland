@@ -39,13 +39,14 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 
     http
       .csrf()
-        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        .disable();
+//        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
     http
       .authorizeRequests(
         request -> request
                     .antMatchers("/","/sign-up","/test","/login","/members/new","/mail/**").permitAll()
-                    .anyRequest().authenticated()
+//                    .anyRequest().authenticated()
       )
       .formLogin(
         login -> login
