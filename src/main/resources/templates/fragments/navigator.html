@@ -17,15 +17,7 @@
               <ul>
                 <li th:classappend="${cp eq 'home'} ? 'active' : ''"><a th:href="@{/}">홈</a></li>
                 <li th:classappend="${cp eq 'iflanderInfo'} ? 'active' : ''"><a th:href="@{/profile/category}">인물도감</a></li>
-<!--                  <ul class="dropdown">-->
-<!--                    <li><a th:href="@{/category}">Categories</a></li>-->
-<!--                    <li><a th:href="@{/profile/detail}">Profile Details</a></li>-->
-<!--                    <li><a href="./anime-watching.html">Anime Watching</a></li>-->
-<!--                    <li><a href="./blog-details.html">Blog Details</a></li>-->
-<!--                    <li><a href="./signup.html">Sign Up</a></li>-->
-<!--                    <li><a th:href="@{/login}">Login</a></li>-->
-<!--                  </ul>-->
-                <li><a href="./blog.html">블로그</a></li>
+                <li th:classappend="${cp eq 'memorize'} ? 'active' : ''"><a th:href="@{/memorize/content}">추억저장소</a></li>
                 <li><a href="#">Contacts</a></li>
               </ul>
             </nav>
