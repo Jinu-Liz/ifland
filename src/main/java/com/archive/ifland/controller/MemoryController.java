@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/memorize")
 public class MemoryController {
 
-
   @GetMapping("/content")
   public String content(Model model) {
     model.addAttribute("cp", "memorize");
