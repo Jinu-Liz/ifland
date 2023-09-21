@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/memorize")
 public class MemoryController {
 
+  @GetMapping("/list")
+  public String list(Model model) {
+    model.addAttribute("cp", "memorize");
+
+    return "main/memory";
+  }
+
   @GetMapping("/content")
   public String content(Model model) {
     model.addAttribute("cp", "memorize");
@@ -18,5 +25,4 @@ public class MemoryController {
     return "main/save-memory";
 
   }
-
 }
