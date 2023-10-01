@@ -28,16 +28,17 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService, UserDetailsService {
 
   private final MemberRepository memberRepository;
+
   private final VerifyEmailRepository veRepository;
+
   private final EmailService emailService;
-  private final CommonUtils commonUtils;
 
   @Transactional
   public void createMember(MemberForm memberForm) {
 
     try {
 
-      VerifyEmail verifyEmail = new VerifyEmail(commonUtils.makeRandomCode());
+      VerifyEmail verifyEmail = new VerifyEmail(CommonUtils.makeRandomCode());
       veRepository.save(verifyEmail);
 
       Member member = Member.builder()
@@ -68,7 +69,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
       boolean existAccount = memberRepository.existsByEmail(account);
 
       if (existAccount) {
-        String authCode = commonUtils.makeRandomCode();
+        String authCode = CommonUtils.makeRandomCode();
         VerifyEmail verifyEmail = new VerifyEmail(authCode);
         veRepository.save(verifyEmail);
 

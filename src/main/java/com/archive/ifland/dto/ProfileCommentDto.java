@@ -7,8 +7,6 @@ import lombok.Data;
 @Data
 public class ProfileCommentDto {
 
-  private static CommonUtils commonUtils;
-
   private Long commentId;
 
   private String iflandNickName;
@@ -25,8 +23,7 @@ public class ProfileCommentDto {
     this.contents = profileComment.getContents();
     this.createdDate = profileComment.getCreatedDate();
 
-    CommonUtils commonUtils = new CommonUtils();
-    dayAgo = commonUtils.getTimeAgo(createdDate);
+    dayAgo = CommonUtils.getTimeAgo(createdDate);
   }
 
 }

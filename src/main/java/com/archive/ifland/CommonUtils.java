@@ -1,21 +1,21 @@
 package com.archive.ifland;
 
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Component
+@UtilityClass
 public class CommonUtils {
 
   // 랜덤 코드 생성
-  public String makeRandomCode() {
+  public static String makeRandomCode() {
     return RandomStringUtils.random(20, 33, 125, true, true);
   }
 
   // 날짜 계산
-  public String getTimeAgo(String time) {
+  public static String getTimeAgo(String time) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
     LocalDateTime curTime = LocalDateTime.now();
     LocalDateTime locTime = LocalDateTime.parse(time, formatter);
