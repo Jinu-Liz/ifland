@@ -1,6 +1,6 @@
 package com.archive.ifland.controller;
 
-import com.archive.ifland.domain.Memory;
+import com.archive.ifland.dto.MemoryDto;
 import com.archive.ifland.service.MemoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ public class MemoryController {
   public String content(Model model,
                         @PathVariable Long id) {
 
-    Memory memory = memoryService.selMemory(id);
+    MemoryDto memory = memoryService.selMemory(id);
     model.addAttribute("cp", "memorize");
     model.addAttribute("memory", memory);
 

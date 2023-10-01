@@ -1,6 +1,6 @@
 package com.archive.ifland.service;
 
-import com.archive.ifland.domain.Memory;
+import com.archive.ifland.dto.MemoryDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +13,8 @@ public class MemoryCommentTest {
 
   @Test
   void selMemory() {
-    Memory memory = memoryService.selMemory(1L);
+    Long id = 1L;
+    MemoryDto memory = memoryService.selMemory(id);
     System.out.println(memory);
   }
 }

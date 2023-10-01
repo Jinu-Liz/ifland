@@ -1,7 +1,5 @@
 package com.archive.ifland.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,8 +21,12 @@ public class Memory extends BaseTimeEntity {
   @Column(name = "memory_id")
   private Long id;
 
-  @OneToMany(mappedBy = "memory", fetch = LAZY)
+  @OneToMany(mappedBy = "memory")
   private List<MemoryComment> comments = new ArrayList<>();
+
+  @ManyToOne(fetch = LAZY)
+  @JoinColumn(name = "member_id")
+  private Member member;
 
   private String image;
 
