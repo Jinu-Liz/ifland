@@ -27,11 +27,22 @@ const buttonDisabled = function (commentBtn) {
   commentBtn.css("background", "#dee2e6");
 }
 
-const writeComment = function () {
+/**
+ * TODO
+ * - 댓글 가져오는 로직 수정.
+ * - 댓글 가져오는 API 수정.
+ * - 댓글 HTML 그리는 로직 수정.
+ * - fetch API 사용 로직 공통화.
+ */
+const writeComment = function (id) {
   const comment = $('#comment');
   const commentBtn = $("#comment-button");
   const content = comment.val();
-  let data = { contents: content };
+  let data = {
+    memberId: id,
+    contents: content
+  };
+
   fetch(
       "/api/profile/comment",
       {
