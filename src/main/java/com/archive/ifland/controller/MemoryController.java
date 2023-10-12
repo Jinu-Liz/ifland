@@ -23,7 +23,7 @@ public class MemoryController {
     return "main/memory";
   }
 
-  @GetMapping("/content/{id}")
+  @GetMapping("/detail/{id}")
   public String content(Model model,
                         @PathVariable Long id) {
 
@@ -31,7 +31,13 @@ public class MemoryController {
     model.addAttribute("cp", "memorize");
     model.addAttribute("memory", memory);
 
-    return "main/save-memory";
+    return "main/memory-detail";
+  }
 
+  @GetMapping("/new")
+  public String create(Model model) {
+    model.addAttribute("cp", "memorize");
+
+    return "main/memory-form";
   }
 }
