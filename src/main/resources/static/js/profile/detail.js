@@ -43,15 +43,9 @@ const writeComment = function (id) {
     contents: content
   };
 
-  fetch(
-      "/api/profile/comment",
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+  let commentData =
+    API.PostData("/api/profile/comment", data)
+      .then(res => res.json())
       .then(
           () => makeCommentHtml()
       );
@@ -61,29 +55,29 @@ const writeComment = function (id) {
 }
 
 const makeCommentHtml = function () {
-  fetch('/api/profile/detail?id=1')
-      .then(res => res.json())
-      .then(data => {
-        let html = "";
-        html += '<div class="section-title">';
-        html +=   '<h5>Comment</h5>';
+  API.GetData('/api/profile/detail?id=1')
+    .then(res => res.json())
+    .then(data => {
+      let html = "";
+      html += '<div class="section-title">';
+      html +=   '<h5>Comment</h5>';
+      html += '</div>';
+
+      const arr = data.comments;
+      arr.forEach((comment, idx) => {
+        let recentComment = idx === 0;
+        html += '<div class="anime__review__item">';
+        (recentComment) ? html +=   '<div class="anime__review__item__pic last__comment">' : html +=   '<div class="anime__review__item__pic">';
+        html +=     '<img src="/images/profile/basic-profile-img.png" alt="">';
+        html +=   '</div>';
+        (recentComment) ? html += '<div class="anime__review__item__text" style="background-color: dimgray;">' : html += '<div class="anime__review__item__text">';
+        html +=     '<h6><span style="color: #ffffff"></span>' + comment.iflandNickName + '<span> - ' + comment.dayAgo + '</span></h6>';
+        html +=     '<p>' + comment.contents + '</p>';
+        html +=   '</div>';
         html += '</div>';
-
-        const arr = data.comments;
-        arr.forEach((comment, idx) => {
-          let recentComment = idx === 0;
-          html += '<div class="anime__review__item">';
-          (recentComment) ? html +=   '<div class="anime__review__item__pic last__comment">' : html +=   '<div class="anime__review__item__pic">';
-          html +=     '<img src="/images/profile/basic-profile-img.png" alt="">';
-          html +=   '</div>';
-          (recentComment) ? html += '<div class="anime__review__item__text" style="background-color: dimgray;">' : html += '<div class="anime__review__item__text">';
-          html +=     '<h6><span style="color: #ffffff"></span>' + comment.iflandNickName + '<span> - ' + comment.dayAgo + '</span></h6>';
-          html +=     '<p>' + comment.contents + '</p>';
-          html +=   '</div>';
-          html += '</div>';
-        });
-
-        $('#commentDiv').html(html);
-
       });
+
+      $('#commentDiv').html(html);
+
+    });
 }
