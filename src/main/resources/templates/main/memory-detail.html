@@ -68,9 +68,10 @@
                             </div>
                             <div class="anime__review__item__text">
                                 <h6><span th:text="${comment.getIflandNickName()}" style="color: #ffffff"></span><span th:text="| - ${comment.getDayAgo()}|"></span></h6>
-                                <p th:text="${comment.contents}"></p>
+                                <p th:text="${comment.getContents()}"></p>
                             </div>
                         </div>
+                        <p th:if="${memory.getComments().size()} == 0" class="not-fount">댓글이 존재하지 않습니다.</p>
                     </div>
                 </div>
             </div>
