@@ -32,107 +32,59 @@
     <!-- Product Section Begin -->
     <section class="product-page spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="product__page__content">
-                        <div class="product__page__title">
-                            <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-6">
-                                    <div class="section-title">
-                                        <h4>Iflander Info</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <div class="product__page__filter">
-                                        <form th:action="@{/profile/category}">
-                                            <div class="input__item">
-                                                <input type="text" name="keyword" style="float: left; width: 180px;" placeholder="검색어">
-                                                <button type="submit" class="search-btn" style="float: right; width:46px; height: 31px;">검색</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+<!--                <div class="col-lg-8">-->
+            <div class="product__page__content">
+                <div class="product__page__title">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6">
+                            <div class="section-title">
+                                <h4>Iflander Info</h4>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-6" th:each="profile : ${profileList}">
-                                <a th:href="@{/profile/detail/{id}(id = ${profile.id})}">
-                                    <div class="product__item">
-                                        <div class="product__item__pic set-bg" th:style="${'background-image: url('+ profile.image + ')'}">
-                                            <div class="comment">
-                                                <i class="fa fa-heart"></i>
-                                                <div class="like_count" th:text="${profile.likeCount}" style="float: right; margin-left: 5px;"></div>
-                                            </div>
-                                            <div class="view">
-                                                <i class="fa fa-eye"></i>
-                                                <div class="view_count" th:text="${profile.viewCount}" style="float: right; margin-left: 5px;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="product__item__text">
-                                            <ul>
-                                                <li th:each="tag : ${profile.tags}" th:text="${tag.tag}" th:style="${'background: rgba(' + tag.rgba + ')'}"></li>
-                                            </ul>
-                                            <h5 th:text="${profile.iflandNickName}" style="color: #ffffff;"></h5>
-                                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <div class="product__page__filter">
+                                <form th:action="@{/profile/category}">
+                                    <div class="input__item">
+                                        <input type="text" name="keyword" style="width: 180px;" placeholder="검색어">
+                                        <button type="submit" class="search-btn" style="width:46px; height: 31px;">검색</button>
                                     </div>
-                                </a>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                    <div class="product__pagination">
-                        <a th:if="${pageDto.hasPrevious}" th:href="@{/profile/category(page=${pageDto.startPage - 2})}"><i class="fa fa-angle-double-left"></i></a>
-                        <a th:classappend="${page - 1 == pageDto.currentPage} ? 'current-page'" th:href="@{/profile/category(page=${page - 1})}" th:each="page : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}" th:text="${page}"></a>
-                        <a th:if="${pageDto.hasNext}" th:href="@{/profile/category(page=${pageDto.endPage})}"><i class="fa fa-angle-double-right"></i></a>
                     </div>
                 </div>
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="product__sidebar">
-                            <div class="product__sidebar__view">
-                                <div class="section-title">
-                                    <h5>Top Views</h5>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6" th:each="profile : ${profileList}">
+                        <a th:href="@{/profile/detail/{id}(id = ${profile.id})}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" th:style="${'background-image: url('+ profile.image + ')'}">
+                                    <div class="comment">
+                                        <i class="fa fa-heart"></i>
+                                        <div class="like_count" th:text="${profile.likeCount}" style="float: right; margin-left: 5px;"></div>
+                                    </div>
+                                    <div class="view">
+                                        <i class="fa fa-eye"></i>
+                                        <div class="view_count" th:text="${profile.viewCount}" style="float: right; margin-left: 5px;"></div>
+                                    </div>
                                 </div>
-                                <ul class="filter__controls">
-                                    <li class="active" data-filter="*">Day</li>
-                                    <li data-filter=".week">Week</li>
-                                    <li data-filter=".month">Month</li>
-                                </ul>
-                                <div class="filter__gallery">
-                                    <div class="product__sidebar__view__item set-bg mix day" data-setbg="images/sidebar/tv-1.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix month week"
-                                         data-setbg="images/sidebar/tv-2.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix week"
-                                         data-setbg="images/sidebar/tv-3.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix month"
-                                         data-setbg="images/sidebar/tv-4.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix day"
-                                         data-setbg="images/sidebar/tv-5.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Fate stay night unlimited blade works</a></h5>
-                                    </div>
+                                <div class="product__item__text">
+                                    <ul>
+                                        <li th:each="tag : ${profile.tags}" th:text="${tag.tag}" th:style="${'background: rgba(' + tag.rgba + ')'}"></li>
+                                    </ul>
+                                    <h5 th:text="${profile.iflandNickName}" style="color: #ffffff;"></h5>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="product__pagination">
+                <a th:if="${pageDto.hasPrevious}" th:href="@{/profile/category(page=${pageDto.startPage - 2})}"><i class="fa fa-angle-double-left"></i></a>
+                <a th:classappend="${page - 1 == pageDto.currentPage} ? 'current-page'" th:href="@{/profile/category(page=${page - 1})}" th:each="page : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}" th:text="${page}"></a>
+                <a th:if="${pageDto.hasNext}" th:href="@{/profile/category(page=${pageDto.endPage})}"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </section>
 <!-- Product Section End -->
 
 <!-- Search model Begin -->
