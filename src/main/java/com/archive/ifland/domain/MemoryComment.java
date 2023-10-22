@@ -30,4 +30,10 @@ public class MemoryComment extends BaseTimeEntity {
 
   private Long likeCount;
 
+  public MemoryComment(Memory memory, Member member, String contents) {
+    this.memory = memory;
+    this.member = member;
+    this.contents = contents;
+  }
+
 }

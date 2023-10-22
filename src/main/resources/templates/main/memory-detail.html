@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="fragments/header :: header"/>
-
+<script th:src="@{/js/profile/detail.js}"></script>
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -27,6 +27,7 @@
     </div>
     <!-- Breadcrumb End -->
 
+    <input type="hidden" id="memoryId" th:value="${memory.getId()}">
     <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
@@ -55,7 +56,7 @@
                         </div>
                         <form id="comment-form" onsubmit="return false;">
                             <textarea id="comment" placeholder="300자 이내로 작성해주세요."></textarea>
-                            <button id="comment-button" onclick="writeComment(11);"><i class="fa fa-location-arrow"></i> Comment</button>
+                            <button id="comment-button" th:onclick="writeComment([[${memory.id}]])"><i class="fa fa-location-arrow"></i> Comment</button>
                         </form>
                     </div>
                     <div id="commentDiv" class="anime__details__review">

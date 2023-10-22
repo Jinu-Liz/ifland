@@ -1,13 +1,16 @@
 package com.archive.ifland.service;
 
-import com.archive.ifland.domain.Memory;
-import com.archive.ifland.domain.QMemory;
+import com.archive.ifland.domain.*;
+import com.archive.ifland.dto.CommentWriteForm;
 import com.archive.ifland.dto.MemoryDto;
+import com.archive.ifland.repository.MemberRepository;
+import com.archive.ifland.repository.MemoryCommentRepository;
 import com.archive.ifland.repository.MemoryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import static com.archive.ifland.domain.QMember.member;
 import static com.archive.ifland.domain.QMemoryComment.memoryComment;
@@ -17,6 +20,10 @@ import static com.archive.ifland.domain.QMemoryComment.memoryComment;
 public class MemoryService {
 
   private final MemoryRepository memoryRepository;
+
+  private final MemberRepository memberRepository;
+
+  private final MemoryCommentRepository memoryCommentRepository;
 
   private final JPAQueryFactory queryFactory;
 
@@ -35,5 +42,17 @@ public class MemoryService {
     assert memory != null;
 
     return new MemoryDto(memory);
+  }
+
+  @Transactional
+  public void writeComment(CommentWriteForm commentData) {
+    String contents = commentData.getContents();
+    if (StringUtils.hasText(contents)) {
+      Memory memory = memoryRepository.findById(commentData.getContentId()).orElseThrow();
+      Member member = memberRepository.findById(commentData.getMemberId()).orElseThrow();
+      MemoryComment newProfileComment = new MemoryComment(memory, member, contents);
+
+      memoryCommentRepository.save(newProfileComment);
+    }
   }
 }

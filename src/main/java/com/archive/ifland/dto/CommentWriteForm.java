@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CommentWriteForm {
 
-  private Long profileId;
+  private Long contentId;
 
   private Long memberId;
 

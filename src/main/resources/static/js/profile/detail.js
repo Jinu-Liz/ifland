@@ -30,13 +30,13 @@ const buttonDisabled = function (commentBtn) {
 /**
  * TODO 추후 로그인한 Member의 ID를 가져와 작성하도록 수정해야함
  */
-const writeComment = function () {
+const writeComment = function (id) {
   const comment = $('#comment');
   const commentBtn = $("#comment-button");
   const content = comment.val();
   let data = {
     memberId: 11,
-    profileId: $('#profileId').val(),
+    contentId: id,
     contents: content
   };
 

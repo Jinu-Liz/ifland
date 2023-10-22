@@ -136,7 +136,7 @@ public class ProfileServiceImpl implements ProfileService {
   public void writeComment(CommentWriteForm commentData) {
     String contents = commentData.getContents();
     if (StringUtils.hasText(contents)) {
-      Profile profile = profileRepository.findById(commentData.getProfileId()).orElseThrow();
+      Profile profile = profileRepository.findById(commentData.getContentId()).orElseThrow();
       Member member = memberRepository.findById(commentData.getMemberId()).orElseThrow();
       ProfileComment newProfileComment = new ProfileComment(profile, member, contents);
       profileCommentRepository.save(newProfileComment);
