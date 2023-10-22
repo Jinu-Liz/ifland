@@ -80,7 +80,8 @@
             </div>
             <div class="product__pagination">
                 <a th:if="${pageDto.hasPrevious}" th:href="@{/profile/category(page=${pageDto.startPage - 2})}"><i class="fa fa-angle-double-left"></i></a>
-                <a th:classappend="${page - 1 == pageDto.currentPage} ? 'current-page'" th:href="@{/profile/category(page=${page - 1})}" th:each="page : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}" th:text="${page}"></a>
+                <a th:if="${pageDto.totalPages > 0}" th:classappend="${page - 1 == pageDto.currentPage} ? 'current-page'" th:href="@{/profile/category(page=${page - 1})}" th:each="page : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}" th:text="${page}"></a>
+                <p th:unless="${pageDto.totalPages > 0}" class="not-fount" style="height: 320px;">해당하는 이프랜더가 존재하지 않습니다.</p>
                 <a th:if="${pageDto.hasNext}" th:href="@{/profile/category(page=${pageDto.endPage})}"><i class="fa fa-angle-double-right"></i></a>
             </div>
         </div>
