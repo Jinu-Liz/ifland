@@ -2,15 +2,17 @@ package com.archive.ifland.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class ProfileCommentTest {
 
   @Test
-  void witeTime() {
+  void writeTime() {
     String createdTime = "2022-07-01 04:13:58";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     LocalDateTime curTime = LocalDateTime.now();

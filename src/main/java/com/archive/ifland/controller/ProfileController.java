@@ -71,12 +71,12 @@ public class ProfileController {
     model.addAttribute("recommendList", recommendList);
     model.addAttribute("cp", "iflanderInfo");
 
-    return "main/anime-details";
+    return "main/profile-details";
   }
 
   @GetMapping("/category")
   public String category(Model model,
-                         @PageableDefault(size = 9) Pageable pageable,
+                         @PageableDefault(size = 12) Pageable pageable,
                          @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                          @RequestParam(required = false, value = "keyword") String keyword) {
 

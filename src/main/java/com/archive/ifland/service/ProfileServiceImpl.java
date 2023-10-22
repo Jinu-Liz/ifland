@@ -3,6 +3,7 @@ package com.archive.ifland.service;
 import com.archive.ifland.domain.Member;
 import com.archive.ifland.domain.Profile;
 import com.archive.ifland.domain.ProfileComment;
+import com.archive.ifland.dto.CommentWriteForm;
 import com.archive.ifland.dto.ProfileDto;
 import com.archive.ifland.exception.NotEnoughCountException;
 import com.archive.ifland.repository.MemberRepository;
@@ -132,10 +133,11 @@ public class ProfileServiceImpl implements ProfileService {
   }
 
   @Override
-  public void writeComment(String contents) {
-    Profile profile = profileRepository.findAll().get(0);
-    Member member = memberRepository.findAll().get(0);
+  public void writeComment(CommentWriteForm commentData) {
+    String contents = commentData.getContents();
     if (StringUtils.hasText(contents)) {
+      Profile profile = profileRepository.findById(commentData.getProfileId()).orElseThrow();
+      Member member = memberRepository.findById(commentData.getMemberId()).orElseThrow();
       ProfileComment newProfileComment = new ProfileComment(profile, member, contents);
       profileCommentRepository.save(newProfileComment);
     }

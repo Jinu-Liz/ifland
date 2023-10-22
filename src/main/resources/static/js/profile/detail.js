@@ -14,7 +14,7 @@ $(document).ready(function () {
     }
   })
 
-  if (comment.val().isEmpty()) buttonDisabled(commentBtn);
+  if (isEmpty(comment.val())) buttonDisabled(commentBtn);
 })
 
 const buttonActive = function (commentBtn) {
@@ -28,34 +28,30 @@ const buttonDisabled = function (commentBtn) {
 }
 
 /**
- * TODO
- * - 댓글 가져오는 로직 수정.
- * - 댓글 가져오는 API 수정.
- * - 댓글 HTML 그리는 로직 수정.
- * - fetch API 사용 로직 공통화.
+ * TODO 추후 로그인한 Member의 ID를 가져와 작성하도록 수정해야함
  */
-const writeComment = function (id) {
+const writeComment = function () {
   const comment = $('#comment');
   const commentBtn = $("#comment-button");
   const content = comment.val();
   let data = {
-    memberId: id,
+    memberId: 11,
+    profileId: $('#profileId').val(),
     contents: content
   };
 
   let commentData =
     API.PostData("/api/profile/comment", data)
-      .then(res => res.json())
-      .then(
-          () => makeCommentHtml()
-      );
+      .then(() => makeCommentHtml())
+      .catch(() => Message.error("댓글 작성 중 문제가 발생하였습니다. 다시 시도해주세요."));
 
   comment.val('');
   buttonDisabled(commentBtn);
 }
 
 const makeCommentHtml = function () {
-  API.GetData('/api/profile/detail?id=1')
+  const profileId = $('#profileId').val();
+  API.GetData('/api/profile/detail?id=' + profileId)
     .then(res => res.json())
     .then(data => {
       let html = "";

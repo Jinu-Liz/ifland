@@ -1,6 +1,6 @@
 package com.archive.ifland.service;
 
-import com.archive.ifland.dto.ProfileCommentDto;
+import com.archive.ifland.dto.CommentWriteForm;
 import com.archive.ifland.dto.ProfileDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ public interface ProfileService {
 
   void plusViewCount(Long id);
 
-  void writeComment(String contents);
+  void writeComment(CommentWriteForm contents);
 
   Page<ProfileDto> iflanderList(Pageable pageable, String keyword);
 
