@@ -49,30 +49,32 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-md-8">
-                    <div class="anime__details__form">
-                        <div class="section-title">
-                            <h5>Write Comment</h5>
-                        </div>
-                        <form id="comment-form" onsubmit="return false;">
-                            <textarea id="comment" placeholder="300자 이내로 작성해주세요."></textarea>
-                            <button id="comment-button" th:onclick="writeComment([[${memory.id}]])"><i class="fa fa-location-arrow"></i> Comment</button>
-                        </form>
-                    </div>
-                    <div id="commentDiv" class="anime__details__review">
-                        <div class="section-title">
-                            <h5>Comment</h5>
-                        </div>
-                        <div class="anime__review__item" th:each="comment : ${memory.getComments()}">
-                            <div class="anime__review__item__pic">
-                                <img th:src="@{/images/profile/basic-profile-img.png}" alt="">
+                <div style="width: 100%;">
+                    <div class="col-lg-12">
+                        <div class="anime__details__form">
+                            <div class="section-title">
+                                <h5>Write Comment</h5>
                             </div>
-                            <div class="anime__review__item__text">
-                                <h6><span th:text="${comment.getIflandNickName()}" style="color: #ffffff"></span><span th:text="| - ${comment.getDayAgo()}|"></span></h6>
-                                <p th:text="${comment.getContents()}"></p>
-                            </div>
+                            <form id="comment-form" onsubmit="return false;">
+                                <textarea id="comment" placeholder="300자 이내로 작성해주세요."></textarea>
+                                <button id="comment-button" th:onclick="writeComment([[${memory.id}]])"><i class="fa fa-location-arrow"></i> Comment</button>
+                            </form>
                         </div>
-                        <p th:if="${memory.getComments().size()} == 0" class="not-fount">댓글이 존재하지 않습니다.</p>
+                        <div id="commentDiv" class="anime__details__review">
+                            <div class="section-title">
+                                <h5>Comment</h5>
+                            </div>
+                            <div class="anime__review__item" th:each="comment : ${memory.getComments()}">
+                                <div class="anime__review__item__pic">
+                                    <img th:src="@{/images/profile/basic-profile-img.png}" alt="">
+                                </div>
+                                <div class="anime__review__item__text">
+                                    <h6><span th:text="${comment.getIflandNickName()}" style="color: #ffffff"></span><span th:text="| - ${comment.getDayAgo()}|"></span></h6>
+                                    <p th:text="${comment.getContents()}"></p>
+                                </div>
+                            </div>
+                            <p th:if="${memory.getComments().size()} == 0" class="not-fount">댓글이 존재하지 않습니다.</p>
+                        </div>
                     </div>
                 </div>
             </div>
