@@ -5,6 +5,7 @@ import com.archive.ifland.domain.MemoryComment;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -41,6 +42,8 @@ public class MemoryDto {
       MemoryCommentDto commentDto = new MemoryCommentDto(comment);
       commentList.add(commentDto);
     }
+
+    Collections.reverse(commentList);   // List 뒤집어서 최신순 정렬.
 
     this.comments = commentList;
   }
