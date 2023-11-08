@@ -12,6 +12,9 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.Collection;
 
+/**
+ * 파일 업로드 연습용 컨트롤러
+ */
 @Slf4j
 @Controller
 @RequestMapping("/servlet/v1")
