@@ -5,7 +5,7 @@ spring:
   datasource:
 #    ifland:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://${DB_ADDRESS}:${DB_PORT}/ifland_wiki?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://221.139.61.136:2580/ifland_wiki?serverTimezone=UTC&characterEncoding=UTF-8
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
@@ -54,6 +54,15 @@ spring:
           auth: true
           starttls:
             enable: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+file:
+  dir: C:/workSpace/ifland/src/main/resources/static/images/
+
 # Mybatis 설정
 #mybatis:
 #  configuration:
@@ -70,6 +79,13 @@ spring:
 #        type:
 #          descriptor:
 #            sql: trace
+
+logging:
+  level:
+    org:
+      apache:
+        coyote:
+          http11: debug
 
 # 카오스 몽키
   profiles:
@@ -90,5 +106,5 @@ chaos:
     watcher:
       repository: true
 
-file:
-  dir: C:/WorkSpace/ifland/src/main/resources/static/images/memory/
+#file:
+#  dir: C:/WorkSpace/ifland/src/main/resources/static/images/memory/
