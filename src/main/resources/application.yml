@@ -105,6 +105,3 @@ chaos:
   monkey:
     watcher:
       repository: true
-
-#file:
-#  dir: C:/WorkSpace/ifland/src/main/resources/static/images/memory/
